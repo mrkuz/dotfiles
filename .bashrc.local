@@ -1,0 +1,22 @@
+# Change directory without cd
+shopt -s autocd
+# Check for running jobs on exit
+shopt -s checkjobs
+# Save multiline commands as one history entry
+shopt -s cmdhist
+# Enable extended pattern matching
+shopt -s extglob
+# Enable **
+shopt -s globstar
+# Append to history file instead of replacing
+shopt -s histappend
+
+alias emacs="XLIB_SKIP_ARGB_VISUALS=1 flatpak run org.gnu.emacs"
+alias p="pushd ."
+alias pp="popd"
+
+HISTCONTROL=erasedups
+HISTSIZE=10000
+HISTFILESIZE=10000
+
+export PATH=$HOME/bin/:$PATH
