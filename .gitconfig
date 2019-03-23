@@ -1,0 +1,5 @@
+[user]
+    name = mrkuz
+    email = markus@bitsandbobs.net
+[credential]
+    helper = store
