@@ -1,3 +1,32 @@
+
+# Colors
+
+BLACK="\e[0;30m"
+RED="\e[0;31m"
+GREEN="\e[0;32m"
+YELLOW="\e[0;33m"
+BLUE="\e[0;34m"
+MAGENTA="\e[0;35m"
+CYAN="\e[0;36m"
+LIGHT_GRAY="\e[0;37m"
+DARK_GRAY="\e[0;90m"
+LIGHT_RED="\e[0;91m"
+LIGHT_GREEN="\e[0;92m"
+LIGHT_YELLOW="\e[0;93m"
+LIGHT_BLUE="\e[0;94m"
+LIGHT_MAGENTA="\e[0;95m"
+LIGHT_CYAN="\e[0;96m"
+WHITE="\e[0;97m"
+RESET="\e[0m"
+
+# Prompt
+
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM="verbose"
+PROMPT_COMMAND='__git_ps1 "$GREEN\u:$BLUE\w$RESET" "\$ " "(%s)"'
+
 # Change directory without cd
 shopt -s autocd
 # Check for running jobs on exit
