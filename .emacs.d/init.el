@@ -4,6 +4,7 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Startup
@@ -29,6 +30,12 @@
 
 ; Always ask for y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
+; Enable all disabled commands
+(setq disabled-command-hook nil)
+; Disable bell
+(setq ring-bell-function 'ignore)
+; Save bookmarks file after each bookmark
+(setq bookmark-save-flag 1)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; File paths
@@ -51,4 +58,8 @@
 (global-linum-mode 1)
 ; Show column number in mode line
 (column-number-mode 1)
+; Delete region when insert character
+(delete-selection-mode 1)
+; Truncate long lines
+(setq-default truncate-lines t)
 
