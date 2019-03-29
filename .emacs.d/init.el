@@ -25,6 +25,13 @@
 (setq auto-save-default nil)
 
 ;;--------------------------------------------------------------------------------------------------
+;; File paths
+;;--------------------------------------------------------------------------------------------------
+
+; Customization file
+(setq custom-file "~/.emacs.d/custom")
+
+;;--------------------------------------------------------------------------------------------------
 ;; General
 ;;--------------------------------------------------------------------------------------------------
 
@@ -36,13 +43,14 @@
 (setq ring-bell-function 'ignore)
 ; Save bookmarks file after each bookmark
 (setq bookmark-save-flag 1)
-
-;;--------------------------------------------------------------------------------------------------
-;; File paths
-;;--------------------------------------------------------------------------------------------------
-
-; Customization file
-(setq custom-file "~/.emacs.d/custom")
+; Scroll to top and bottom at end
+(setq-default scroll-error-top-bottom t)
+; Try to keep position when scrolling
+(setq-default scroll-preserve-screen-position t)
+; Delete region when insert character
+(delete-selection-mode 1)
+; Raise display time of suggestions
+(setq suggest-key-bindings 4)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Look and feel
@@ -58,8 +66,21 @@
 (global-linum-mode 1)
 ; Show column number in mode line
 (column-number-mode 1)
-; Delete region when insert character
-(delete-selection-mode 1)
 ; Truncate long lines
 (setq-default truncate-lines t)
 
+;;--------------------------------------------------------------------------------------------------
+;; Key bindings
+;;--------------------------------------------------------------------------------------------------
+
+(setq my-map (make-sparse-keymap))
+(global-set-key (kbd "C-;") my-map)
+(global-set-key (kbd "C-ö") my-map)
+
+(define-key my-map (kbd "h h") 'highlight-changes-mode)
+(define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
+
+(defun my-highlight-changes-remove-all ()
+  "Remove all changes."
+  (interactive)
+  (highlight-changes-remove-highlight (point-min) (point-max)))
