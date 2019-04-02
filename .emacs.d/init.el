@@ -68,6 +68,8 @@
 (column-number-mode 1)
 ; Truncate long lines
 (setq-default truncate-lines t)
+; Show trailing whitespace
+(setq-default show-trailing-whitespace t)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Key bindings
