@@ -5,6 +5,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
+(require 'no-littering)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Startup
@@ -29,7 +30,7 @@
 ;;--------------------------------------------------------------------------------------------------
 
 ; Customization file
-(setq custom-file "~/.emacs.d/custom")
+(setq custom-file (no-littering-expand-etc-file-name "custom"))
 
 ;;--------------------------------------------------------------------------------------------------
 ;; General
@@ -97,3 +98,77 @@
   "Remove all changes."
   (interactive)
   (highlight-changes-remove-highlight (point-min) (point-max)))
+
+;;--------------------------------------------------------------------------------------------------
+;; Packages
+;;--------------------------------------------------------------------------------------------------
+
+(eval-when-compile
+  (require 'use-package))
+
+(use-package diminish
+  :ensure t)
+
+(use-package no-littering
+  :ensure t
+  :requires recentf
+  :config
+  (add-to-list 'recentf-exclude no-littering-etc-directory)
+  (add-to-list 'recentf-exclude no-littering-var-directory))
+
+(use-package ido
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1))
+
+(use-package ido-completing-read+
+  :after ido
+  :ensure t
+  :config
+  (ido-ubiquitous-mode 1))
+
+(use-package smex
+  :after ido
+  :ensure t
+  :bind (( "M-x" . 'smex)))
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode 1))
+
+(use-package anzu
+  :ensure t
+  :config
+  (global-anzu-mode 1)
+  :custom-face (anzu-mode-line ((t (nil :weight 'normal :foreground "white"))))
+  :bind (([remap query-replace] . 'anzu-query-replace)
+	 ([remap query-replace-regexp] . 'anzu-query-replace-regexp)
+	 :map isearch-mode-map
+	 ([remap isearch-query-replace]  . 'anzu-isearch-query-replace)
+	 ([remap isearch-query-replace-regexp] . 'anzu-isearch-query-replace-regexp)))
+
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
+
+(use-package ace-jump-mode
+  :ensure t
+  :bind (:map my-map
+	      ("a j" . 'ace-jump-word-mode)
+	      ("a l" . 'ace-jump-line-mode)))
+
+(use-package ace-window
+  :ensure t
+  :bind (:map my-map ("a w" . 'ace-window)))
+
+(use-package expand-region
+  :ensure t
+  :bind (:map my-map ("x" . 'er/expand-region)))
+
+(use-package awesome-tab
+  :load-path "site-lisp/awesome-tab/"
+  :config
+  (setq awesome-tab-background-color "grey12")
+  (setq awesome-tab-style "bar"))
