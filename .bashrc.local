@@ -21,11 +21,37 @@ RESET="\[\e[0m\]"
 
 # Prompt
 
-GIT_PS1_SHOWDIRTYSTATE=true
-GIT_PS1_SHOWSTASHSTATE=true
-GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWUPSTREAM="verbose"
-PROMPT_COMMAND='__git_ps1 "$GREEN\u:$BLUE\w$RESET" "\$ " "(%s)"'
+function create_prompt() {
+  [[ $? -eq 0 ]] && prefix="$GREEN" || prefix="$RED"
+  PS1="${prefix}\u@\h${RESET} \w"
+  head="$(git rev-parse HEAD 2>/dev/null)"
+  if [[ -n "$head" && "$head" != "HEAD" ]]; then
+    pretty="<detached>"
+    branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+    if [[ -n "$branch" ]]; then
+      pretty="$branch"
+    else
+      local tag="$(git describe --exact-match HEAD 2>/dev/null)"
+      if [[ -n "$tag" ]]; then
+        pretty="$tag"
+      fi
+    fi
+    PS1="${PS1} [${LIGHT_MAGENTA}${pretty}@${head:0:8}"
+    if ! git diff --quiet --exit-code; then
+      PS1="${PS1}*"
+    fi
+    if ! git diff --staged --quiet --exit-code; then
+      PS1="${PS1}^"
+    fi
+    if git rev-parse stash &>/dev/null; then
+      PS1="${PS1}!"
+    fi
+    PS1="${PS1}${RESET}]"
+  fi
+  PS1="${PS1}\n\$ "
+}
+
+PROMPT_COMMAND="create_prompt"
 
 # Change directory without cd
 shopt -s autocd
@@ -46,8 +72,8 @@ alias emacs="XLIB_SKIP_ARGB_VISUALS=1 flatpak run org.gnu.emacs"
 alias p="pushd ."
 alias pp="popd"
 
-HISTCONTROL=erasedups
-HISTSIZE=10000
-HISTFILESIZE=10000
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 
 export PATH=$HOME/bin/:$PATH
