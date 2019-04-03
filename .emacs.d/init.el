@@ -70,6 +70,17 @@
 (setq-default truncate-lines t)
 ; Show trailing whitespace
 (setq-default show-trailing-whitespace t)
+; Cycle through window configurations
+(winner-mode 1)
+; Disable menu bar
+(menu-bar-mode 0)
+; Disable scroll bar
+(scroll-bar-mode 0)
+; Show size in mode line
+(size-indication-mode 1)
+; Highligh current line
+(global-hl-line-mode)
+(set-face-attribute hl-line-face nil :underline nil :background "grey10")
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Key bindings
