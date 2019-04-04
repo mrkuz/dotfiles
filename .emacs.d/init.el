@@ -9,6 +9,11 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package benchmark-init
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
 (use-package diminish
   :ensure t)
 
@@ -142,6 +147,7 @@
 
 (use-package anzu
   :ensure t
+  :defer t
   :config
   (global-anzu-mode 1)
   :custom-face (anzu-mode-line ((t (nil :weight 'normal :foreground "white"))))
@@ -158,16 +164,19 @@
 
 (use-package ace-jump-mode
   :ensure t
+  :defer t
   :bind (:map my-map
 	      ("a j" . 'ace-jump-word-mode)
 	      ("a l" . 'ace-jump-line-mode)))
 
 (use-package ace-window
   :ensure t
+  :defer t
   :bind (:map my-map ("a w" . 'ace-window)))
 
 (use-package expand-region
   :ensure t
+  :defer t
   :bind (:map my-map ("x" . 'er/expand-region)))
 
 (use-package awesome-tab
