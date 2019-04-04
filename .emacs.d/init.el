@@ -17,7 +17,9 @@
 (use-package diminish
   :ensure t)
 
-(use-package recentf)
+(use-package recentf
+  :config
+  (recentf-mode 1))
 
 (use-package no-littering
   :ensure t
@@ -88,8 +90,6 @@
 (column-number-mode 1)
 ; Truncate long lines
 (setq-default truncate-lines t)
-; Show trailing whitespace
-(setq-default show-trailing-whitespace t)
 ; Cycle through window configurations
 (winner-mode 1)
 ; Disable menu bar
@@ -99,8 +99,10 @@
 ; Show size in mode line
 (size-indication-mode 1)
 ; Highligh current line
-(global-hl-line-mode)
+(global-hl-line-mode 1)
 (set-face-attribute hl-line-face nil :underline nil :background "grey10")
+; Show matching parens
+(show-paren-mode 1)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Key bindings
@@ -112,6 +114,7 @@
 
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
 (define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
+(define-key my-map (kbd "v w") 'whitespace-mode)
 
 (defun my-highlight-changes-remove-all ()
   "Remove all changes."
@@ -123,16 +126,24 @@
 ;;--------------------------------------------------------------------------------------------------
 
 (use-package ido
-  :defer t
+  :defer 1
   :config
   (ido-mode 1)
-  (ido-everywhere 1))
+  (ido-everywhere 1)
+  (setq ido-enable-flex-matching t))
 
 (use-package ido-completing-read+
   :ensure t
   :after ido
   :config
   (ido-ubiquitous-mode 1))
+
+(use-package flx-ido
+  :ensure t
+  :after ido
+  :config
+  (flx-ido-mode 1)
+  (setq flx-ido-use-faces nil))
 
 (use-package smex
   :ensure t
@@ -141,13 +152,13 @@
 
 (use-package which-key
   :ensure t
-  :defer t
+  :defer 1
   :config
   (which-key-mode 1))
 
 (use-package anzu
   :ensure t
-  :defer t
+  :defer 1
   :config
   (global-anzu-mode 1)
   :custom-face (anzu-mode-line ((t (nil :weight 'normal :foreground "white"))))
@@ -164,24 +175,48 @@
 
 (use-package ace-jump-mode
   :ensure t
-  :defer t
+  :defer 1
   :bind (:map my-map
 	      ("a j" . 'ace-jump-word-mode)
 	      ("a l" . 'ace-jump-line-mode)))
 
 (use-package ace-window
   :ensure t
-  :defer t
+  :defer 1
   :bind (:map my-map ("a w" . 'ace-window)))
 
 (use-package expand-region
   :ensure t
-  :defer t
+  :defer 1
   :bind (:map my-map ("x" . 'er/expand-region)))
 
 (use-package awesome-tab
   :load-path "site-lisp/awesome-tab/"
-  :defer t
+  :defer 1
   :config
   (setq awesome-tab-background-color "grey12")
-  (setq awesome-tab-style "bar"))
+  (setq awesome-tab-style "bar")
+  :bind (:map my-map ("v t" . 'awesome-tab-mode)))
+
+(use-package projectile
+  :ensure t
+  :defer 1
+  :config
+  (projectile-mode +1)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+
+(use-package treemacs
+  :ensure t
+  :defer 1
+  :config
+  (setq treemacs-no-png-images t)
+  (setq treemacs-collapse-dirs 10)
+  (setq treemacs-width 30)
+  (setq treemacs-indentation 1)
+  (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist"))
+  :custom-face (treemacs-root-face ((t (:inherit font-lock-constant-face :underline t)))))
+
+(use-package treemacs-projectile
+  :ensure t
+  :after treemacs projectile)
