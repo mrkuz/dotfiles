@@ -1,11 +1,25 @@
 ;;--------------------------------------------------------------------------------------------------
-;; Packages
+;; Packages (early)
 ;;--------------------------------------------------------------------------------------------------
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
-(require 'no-littering)
+
+(eval-when-compile
+  (require 'use-package))
+
+(use-package diminish
+  :ensure t)
+
+(use-package recentf)
+
+(use-package no-littering
+  :ensure t
+  :after recentf
+  :config
+  (add-to-list 'recentf-exclude no-littering-etc-directory)
+  (add-to-list 'recentf-exclude no-littering-var-directory))
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Startup
@@ -103,37 +117,26 @@
 ;; Packages
 ;;--------------------------------------------------------------------------------------------------
 
-(eval-when-compile
-  (require 'use-package))
-
-(use-package diminish
-  :ensure t)
-
-(use-package no-littering
-  :ensure t
-  :requires recentf
-  :config
-  (add-to-list 'recentf-exclude no-littering-etc-directory)
-  (add-to-list 'recentf-exclude no-littering-var-directory))
-
 (use-package ido
+  :defer t
   :config
   (ido-mode 1)
   (ido-everywhere 1))
 
 (use-package ido-completing-read+
-  :after ido
   :ensure t
+  :after ido
   :config
   (ido-ubiquitous-mode 1))
 
 (use-package smex
-  :after ido
   :ensure t
+  :after ido
   :bind (( "M-x" . 'smex)))
 
 (use-package which-key
   :ensure t
+  :defer t
   :config
   (which-key-mode 1))
 
@@ -169,6 +172,7 @@
 
 (use-package awesome-tab
   :load-path "site-lisp/awesome-tab/"
+  :defer t
   :config
   (setq awesome-tab-background-color "grey12")
   (setq awesome-tab-style "bar"))
