@@ -622,7 +622,7 @@ Call `awesome-tab-tab-label-function' to obtain a label for TAB."
     (awesome-tab-set-template
      tabset
      (list (nreverse elts)
-           (propertize "%-"
+           (propertize " "
                        'face (list :background padcolor
                                    :foreground padcolor)
                        'pointer 'arrow)))

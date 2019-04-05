@@ -213,12 +213,18 @@
 (use-package treemacs
   :ensure t
   :defer t
-  :config
+  :init
   (add-hook 'treemacs-mode-hook (lambda () (linum-mode 0)))
   (add-hook 'treemacs-mode-hook (lambda () (setq mode-line-format "")))
+  :config
   (setq treemacs-python-executable (executable-find "python3"))
   (set-face-attribute 'treemacs-root-face nil :height 1.0 :underline nil)
+  (setq treemacs-icon-root-png
+	(concat " "
+		(all-the-icons-octicon "repo" :v-adjust -0.1 :height 1.2 :face 'font-lock-string-face)
+                " "))
   (setq treemacs-collapse-dirs 10)
+  (setq treemacs-width 30)
   (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist")))
 
 (use-package treemacs-projectile
