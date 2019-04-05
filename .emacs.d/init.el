@@ -210,6 +210,7 @@
   :ensure t
   :defer 1
   :config
+  (add-hook 'treemacs-mode-hook (lambda () (linum-mode 0)))
   (setq treemacs-python-executable (executable-find "python3"))
   (setq treemacs-no-png-images t)
   (setq treemacs-collapse-dirs 10)
