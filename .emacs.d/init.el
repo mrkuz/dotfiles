@@ -6,8 +6,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
-(eval-when-compile
-  (require 'use-package))
+(require 'use-package)
 
 (use-package benchmark-init
   :ensure t
@@ -78,8 +77,6 @@
 ;; Look and feel
 ;;--------------------------------------------------------------------------------------------------
 
-; Load theme
-(load-theme 'wombat)
 ; Disable toolbar
 (tool-bar-mode 0)
 ; Disable blinking cursor
@@ -100,7 +97,6 @@
 (size-indication-mode 1)
 ; Highligh current line
 (global-hl-line-mode 1)
-(set-face-attribute hl-line-face nil :underline nil :background "grey10")
 ; Show matching parens
 (show-paren-mode 1)
 
@@ -125,8 +121,11 @@
 ;; Packages
 ;;--------------------------------------------------------------------------------------------------
 
+(use-package eldoc
+  :defer t
+  :diminish eldoc-mode)
+
 (use-package ido
-  :defer 1
   :config
   (ido-mode 1)
   (ido-everywhere 1)
@@ -142,8 +141,7 @@
   :ensure t
   :after ido
   :config
-  (flx-ido-mode 1)
-  (setq flx-ido-use-faces nil))
+  (flx-ido-mode 1))
 
 (use-package smex
   :ensure t
@@ -152,13 +150,13 @@
 
 (use-package which-key
   :ensure t
-  :defer 1
+  :diminish which-key-mode
   :config
   (which-key-mode 1))
 
 (use-package anzu
   :ensure t
-  :defer 1
+  :diminish anzu-mode
   :config
   (global-anzu-mode 1)
   :custom-face (anzu-mode-line ((t (nil :weight 'normal :foreground "white"))))
@@ -168,27 +166,34 @@
 	 ([remap isearch-query-replace]  . 'anzu-isearch-query-replace)
 	 ([remap isearch-query-replace-regexp] . 'anzu-isearch-query-replace-regexp)))
 
-(use-package telephone-line
-  :ensure t
-  :config
-  (telephone-line-mode 1))
-
 (use-package ace-jump-mode
   :ensure t
-  :defer 1
   :bind (:map my-map
 	      ("a j" . 'ace-jump-word-mode)
 	      ("a l" . 'ace-jump-line-mode)))
 
 (use-package ace-window
   :ensure t
-  :defer 1
   :bind (:map my-map ("a w" . 'ace-window)))
 
 (use-package expand-region
   :ensure t
-  :defer 1
   :bind (:map my-map ("x" . 'er/expand-region)))
+
+(use-package all-the-icons
+  :ensure t)
+
+(use-package doom-themes
+  :ensure t
+  :after all-the-icons
+  :config
+  (load-theme 'doom-one 1)
+  (doom-themes-treemacs-config))
+
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
 
 (use-package awesome-tab
   :load-path "site-lisp/awesome-tab/"
@@ -200,7 +205,6 @@
 
 (use-package projectile
   :ensure t
-  :defer 1
   :config
   (projectile-mode +1)
   :bind-keymap
@@ -208,16 +212,14 @@
 
 (use-package treemacs
   :ensure t
-  :defer 1
+  :defer t
   :config
   (add-hook 'treemacs-mode-hook (lambda () (linum-mode 0)))
+  (add-hook 'treemacs-mode-hook (lambda () (setq mode-line-format "")))
   (setq treemacs-python-executable (executable-find "python3"))
-  (setq treemacs-no-png-images t)
+  (set-face-attribute 'treemacs-root-face nil :height 1.0 :underline nil)
   (setq treemacs-collapse-dirs 10)
-  (setq treemacs-width 30)
-  (setq treemacs-indentation 1)
-  (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist"))
-  :custom-face (treemacs-root-face ((t (:inherit font-lock-constant-face :underline t)))))
+  (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist")))
 
 (use-package treemacs-projectile
   :ensure t
