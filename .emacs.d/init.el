@@ -1,6 +1,7 @@
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (early)
 ;;--------------------------------------------------------------------------------------------------
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
@@ -124,6 +125,11 @@
   :defer t
   :diminish eldoc-mode)
 
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
+
 (use-package ido
   :config
   (ido-mode 1)
@@ -240,7 +246,7 @@
   :defer 1
   :config
   (global-company-mode 1)
-  (setq company-minimum-prefix-length 1)
+  (setq company-minimum-prefix-length 0)
   (setq company-show-numbers t)
   :hook (company-mode . company-quickhelp-mode))
 
@@ -250,4 +256,24 @@
   :config
   (setq company-quickhelp-delay 0.0)
   (setq company-quickhelp-max-lines 30)
-  (setq company-quickhelp-use-propertized-text nil))
+  (setq company-quickhelp-use-propertized-text t))
+
+
+(use-package lsp-mode
+  :ensure t
+  :defer t)
+
+(use-package company-lsp
+  :ensure t
+  :after lsp-mode company)
+
+(use-package lsp-ui
+  :ensure t
+  :after lsp-mode)
+
+(use-package lsp-java
+  :ensure t
+  :after lsp-mode)
+
+(use-package lsp-java-treemacs
+  :after lsp-mode treemacs)
