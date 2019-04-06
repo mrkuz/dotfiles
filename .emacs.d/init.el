@@ -205,6 +205,7 @@
 
 (use-package projectile
   :ensure t
+  :defer 1
   :config
   (projectile-mode +1)
   :bind-keymap
@@ -225,7 +226,12 @@
                 " "))
   (setq treemacs-collapse-dirs 10)
   (setq treemacs-width 30)
-  (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist")))
+  (setq treemacs-is-never-other-window t)
+  (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist"))
+  :bind (:map treemacs-mode-map ([mouse-1] . 'treemacs-single-click-expand-action))
+  :bind (:map my-map ("t t" . 'treemacs))
+  :bind (:map my-map ("t p" . 'treemacs-add-and-display-current-project))
+  :bind (:map my-map ("t o" . 'treemacs-select-window)))
 
 (use-package treemacs-projectile
   :ensure t
