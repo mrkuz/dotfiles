@@ -1,7 +1,6 @@
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (early)
 ;;--------------------------------------------------------------------------------------------------
-
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
@@ -214,9 +213,6 @@
 (use-package treemacs
   :ensure t
   :defer t
-  :init
-  (add-hook 'treemacs-mode-hook (lambda () (linum-mode 0)))
-  (add-hook 'treemacs-mode-hook (lambda () (setq mode-line-format "")))
   :config
   (setq treemacs-python-executable (executable-find "python3"))
   (set-face-attribute 'treemacs-root-face nil :height 1.0 :underline nil)
@@ -228,6 +224,8 @@
   (setq treemacs-width 30)
   (setq treemacs-is-never-other-window t)
   (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist"))
+  :hook (treemacs-mode . (lambda () (linum-mode 0)))
+  :hook (treemacs-mode . (lambda () (setq mode-line-format "")))
   :bind (:map treemacs-mode-map ([mouse-1] . 'treemacs-single-click-expand-action))
   :bind (:map my-map ("t t" . 'treemacs))
   :bind (:map my-map ("t p" . 'treemacs-add-and-display-current-project))
@@ -236,3 +234,20 @@
 (use-package treemacs-projectile
   :ensure t
   :after treemacs projectile)
+
+(use-package company
+  :ensure t
+  :defer 1
+  :config
+  (global-company-mode 1)
+  (setq company-minimum-prefix-length 1)
+  (setq company-show-numbers t)
+  :hook (company-mode . company-quickhelp-mode))
+
+(use-package company-quickhelp
+  :ensure t
+  :after company
+  :config
+  (setq company-quickhelp-delay 0.0)
+  (setq company-quickhelp-max-lines 30)
+  (setq company-quickhelp-use-propertized-text nil))
