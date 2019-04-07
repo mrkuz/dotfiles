@@ -89,8 +89,6 @@
 (global-linum-mode 1)
 ; Show column number in mode line
 (column-number-mode 1)
-; Truncate long lines
-(setq-default truncate-lines t)
 ; Cycle through window configurations
 (winner-mode 1)
 ; Disable menu bar
@@ -115,11 +113,17 @@
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
 (define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
 (define-key my-map (kbd "v w") 'whitespace-mode)
+(define-key my-map (kbd "v l") 'my-toogle-truncate-line)
 
 (defun my-highlight-changes-remove-all ()
   "Remove all changes."
   (interactive)
   (highlight-changes-remove-highlight (point-min) (point-max)))
+
+(defun my-toggle-truncate-line ()
+  "Toggle trunacte line."
+  (interactive)
+  (setq truncate-lines (if (not truncate-lines) t nil)))
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages
