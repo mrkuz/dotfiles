@@ -6,6 +6,10 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 (require 'use-package)
 
 (use-package benchmark-init
@@ -226,7 +230,8 @@
   :defer 1
   :diminish projectile-mode
   :config
-  (projectile-mode +1)
+  (projectile-global-mode)
+  (setq projectile-globally-ignored-buffers '("\\*.*"))
   :bind-keymap
   ("C-c p" . projectile-command-map))
 
@@ -263,15 +268,20 @@
   (global-company-mode 1)
   (setq company-minimum-prefix-length 0)
   (setq company-show-numbers t)
-  (setq company-idle-delay 0.0)
-  :hook (company-mode . company-quickhelp-mode))
+  (setq company-idle-delay 0.2)
+  :hook (company-mode . company-quickhelp-mode)
+  :bind (:map company-active-map ("M-f" . 'company-flx-mode)))
+
+(use-package company-flx
+  :ensure t
+  :after company)
 
 (use-package company-quickhelp
   :ensure t
   :after company
   :config
-  (setq company-quickhelp-delay 0.0)
-  (setq company-quickhelp-max-lines 30)
+  (setq company-quickhelp-delay 1.2)
+  (setq company-quickhelp-max-lines 20)
   (setq company-quickhelp-use-propertized-text t))
 
 (use-package yasnippet
