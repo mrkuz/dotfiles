@@ -122,12 +122,15 @@
 ;;--------------------------------------------------------------------------------------------------
 
 (use-package eldoc
-  :defer t
   :diminish eldoc-mode)
+
+(use-package abbrev
+  :diminish abbrev-mode)
 
 (use-package exec-path-from-shell
   :ensure t
   :config
+  (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
 (use-package ido
@@ -151,6 +154,7 @@
 (use-package smex
   :ensure t
   :after ido
+  :commands smex
   :bind (( "M-x" . 'smex)))
 
 (use-package which-key
@@ -161,6 +165,7 @@
 
 (use-package anzu
   :ensure t
+  :defer 1
   :diminish anzu-mode
   :config
   (global-anzu-mode 1)
@@ -173,16 +178,19 @@
 
 (use-package ace-jump-mode
   :ensure t
+  :commands (ace-jump-word-mode ace-jump-line-mode)
   :bind (:map my-map
 	      ("a j" . 'ace-jump-word-mode)
 	      ("a l" . 'ace-jump-line-mode)))
 
 (use-package ace-window
   :ensure t
+  :commands ace-windw
   :bind (:map my-map ("a w" . 'ace-window)))
 
 (use-package expand-region
   :ensure t
+  :commands expand-region
   :bind (:map my-map ("x" . 'er/expand-region)))
 
 (use-package all-the-icons
@@ -198,11 +206,16 @@
 (use-package telephone-line
   :ensure t
   :config
+  (setq telephone-line-rhs
+	'((nil . (telephone-line-flycheck-segment telephone-line-misc-info-segment))
+          (accent . (telephone-line-major-mode-segment))
+	  (nil . (telephone-line-minor-mode-segment))
+          (evil . (telephone-line-airline-position-segment))))
   (telephone-line-mode 1))
 
 (use-package awesome-tab
   :load-path "site-lisp/awesome-tab/"
-  :defer 1
+  :commands awesome-tab-mode
   :config
   (setq awesome-tab-background-color "grey12")
   (setq awesome-tab-style "bar")
@@ -211,6 +224,7 @@
 (use-package projectile
   :ensure t
   :defer 1
+  :diminish projectile-mode
   :config
   (projectile-mode +1)
   :bind-keymap
@@ -218,7 +232,7 @@
 
 (use-package treemacs
   :ensure t
-  :defer t
+  :commands treemacs
   :config
   (setq treemacs-python-executable (executable-find "python3"))
   (set-face-attribute 'treemacs-root-face nil :height 1.0 :underline nil)
@@ -244,10 +258,12 @@
 (use-package company
   :ensure t
   :defer 1
+  :diminish company-mode
   :config
   (global-company-mode 1)
   (setq company-minimum-prefix-length 0)
   (setq company-show-numbers t)
+  (setq company-idle-delay 0.0)
   :hook (company-mode . company-quickhelp-mode))
 
 (use-package company-quickhelp
@@ -258,10 +274,14 @@
   (setq company-quickhelp-max-lines 30)
   (setq company-quickhelp-use-propertized-text t))
 
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :diminish yas-minor-mode)
 
 (use-package lsp-mode
   :ensure t
-  :defer t)
+  :commands lsp)
 
 (use-package company-lsp
   :ensure t
