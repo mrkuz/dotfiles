@@ -290,8 +290,10 @@
 
 (use-package yasnippet
   :ensure t
-  :defer t
-  :diminish yas-minor-mode)
+  :defer 1
+  :diminish yas-minor-mode
+  :config
+  (yas-global-mode))
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (lsp)
@@ -299,19 +301,23 @@
 
 (use-package lsp-mode
   :ensure t
-  :commands lsp)
+  :commands lsp
+  :config
+  (setq lsp-auto-configure nil))
 
 (use-package company-lsp
   :ensure t
   :after lsp-mode company
   :config
+  (add-to-list 'company-backends 'company-lsp)
   (setq company-lsp-cache-candidates 'auto))
   
 (use-package lsp-ui
   :ensure t
   :after lsp-mode
   :config
-  (setq lsp-ui-sideline-enable nil))
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-doc-position 'at-point))
 
 (use-package lsp-java
   :ensure t
