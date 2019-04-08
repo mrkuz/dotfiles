@@ -293,21 +293,35 @@
   :defer t
   :diminish yas-minor-mode)
 
+;;--------------------------------------------------------------------------------------------------
+;; Packages (lsp)
+;;--------------------------------------------------------------------------------------------------
+
 (use-package lsp-mode
   :ensure t
   :commands lsp)
 
 (use-package company-lsp
   :ensure t
-  :after lsp-mode company)
-
+  :after lsp-mode company
+  :config
+  (setq company-lsp-cache-candidates 'auto))
+  
 (use-package lsp-ui
   :ensure t
-  :after lsp-mode)
+  :after lsp-mode
+  :config
+  (setq lsp-ui-sideline-enable nil))
 
 (use-package lsp-java
   :ensure t
-  :after lsp-mode)
+  :after lsp-mode
+  :config
+  (setq lsp-java-auto-build nil)
+  (setq lsp-java-progress-report nil)
+  (setq lsp-java-server-install-dir (no-littering-expand-var-file-name "eclipse.jdt.ls/server"))
+  (setq lsp-java-workspace-dir (no-littering-expand-var-file-name "workspace"))
+  (setq lsp-java-workspace-cache-dir (no-littering-expand-var-file-name "workspace/cache")))
 
 (use-package lsp-java-treemacs
   :after lsp-mode treemacs)
