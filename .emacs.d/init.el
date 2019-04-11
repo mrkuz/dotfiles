@@ -113,7 +113,7 @@
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
 (define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
 (define-key my-map (kbd "v w") 'whitespace-mode)
-(define-key my-map (kbd "v l") 'my-toogle-truncate-line)
+(define-key my-map (kbd "v l") 'my-toggle-truncate-line)
 
 (defun my-highlight-changes-remove-all ()
   "Remove all changes."
@@ -211,6 +211,22 @@
   (load-theme 'doom-one 1)
   (doom-themes-treemacs-config))
 
+(use-package dashboard
+  :ensure t
+  :config
+  (setq dashboard-items '((recents . 5) (bookmarks . 5) (projects . 5)))
+  (dashboard-setup-startup-hook))
+
+(use-package eyebrowse
+  :ensure t
+  :defer 1
+  :config
+  (setq eyebrowse-mode-line-left-delimiter "")
+  (setq eyebrowse-mode-line-right-delimiter "")
+  (setq eyebrowse-mode-line-separator " ")
+  (setq eyebrowse-new-workspace t)
+  (eyebrowse-mode))
+
 (use-package telephone-line
   :ensure t
   :config
@@ -274,7 +290,11 @@
   (setq company-show-numbers t)
   (setq company-idle-delay 0.2)
   :hook (company-mode . company-quickhelp-mode)
-  :bind (:map company-active-map ("M-f" . 'company-flx-mode)))
+  :bind (
+	 :map
+	 company-active-map ("M-f" . 'company-flx-mode)
+	 :map
+	 my-map ("SPC" . 'company-complete)))
 
 (use-package company-flx
   :ensure t
@@ -290,10 +310,15 @@
 
 (use-package yasnippet
   :ensure t
-  :defer 1
+  :after company
   :diminish yas-minor-mode
   :config
-  (yas-global-mode))
+  (yas-global-mode)
+  :bind (:map my-map ("TAB" . 'company-yasnippet)))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (lsp)
@@ -303,7 +328,8 @@
   :ensure t
   :commands lsp
   :config
-  (setq lsp-auto-configure nil))
+  (setq lsp-auto-configure nil)
+  (lsp--flymake-setup))
 
 (use-package company-lsp
   :ensure t
