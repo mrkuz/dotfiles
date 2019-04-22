@@ -70,8 +70,6 @@
 (setq suggest-key-bindings 4)
 ; Enable drag and drop text via mouse
 (setq mouse-drag-and-drop-region t)
-; No dialog boxes
-(setq use-dialog-box nil)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Look and feel
@@ -97,6 +95,10 @@
 (global-hl-line-mode 1)
 ; Show matching parens
 (show-paren-mode 1)
+; No dialog boxes
+(setq use-dialog-box nil)
+; Disable GTK tooltips
+(setq x-gtk-use-system-tooltips nil)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Key bindings
