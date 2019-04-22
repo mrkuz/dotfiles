@@ -20,16 +20,8 @@
 (use-package diminish
   :ensure t)
 
-(use-package recentf
-  :config
-  (recentf-mode 1))
-
 (use-package no-littering
-  :ensure t
-  :after recentf
-  :config
-  (add-to-list 'recentf-exclude no-littering-etc-directory)
-  (add-to-list 'recentf-exclude no-littering-var-directory))
+  :ensure t)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Startup
@@ -76,6 +68,10 @@
 (delete-selection-mode 1)
 ; Raise display time of suggestions
 (setq suggest-key-bindings 4)
+; Enable drag and drop text via mouse
+(setq mouse-drag-and-drop-region t)
+; No dialog boxes
+(setq use-dialog-box nil)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Look and feel
@@ -128,6 +124,13 @@
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages
 ;;--------------------------------------------------------------------------------------------------
+
+(use-package recentf
+  :after no-littering
+  :config
+  (add-to-list 'recentf-exclude no-littering-etc-directory)
+  (add-to-list 'recentf-exclude no-littering-var-directory)
+  (recentf-mode 1))
 
 (use-package eldoc
   :diminish eldoc-mode)
