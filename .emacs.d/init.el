@@ -70,6 +70,13 @@
 (setq suggest-key-bindings 4)
 ; Enable drag and drop text via mouse
 (setq mouse-drag-and-drop-region t)
+; Tab width
+(setq-default tab-width 4)
+; Always use spaces
+(setq indent-tabs-mode nil)
+; Indent four spaces
+(setq tab-stop-list '(0 4))
+
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Look and feel
