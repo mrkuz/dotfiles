@@ -69,7 +69,9 @@ shopt -s nocaseglob
 # Ignore case when matching patterns
 shopt -s nocasematch
 
-alias emacs="XLIB_SKIP_ARGB_VISUALS=1 flatpak run org.gnu.emacs"
+EMACS="XLIB_SKIP_ARGB_VISUALS=1 flatpak run org.gnu.emacs"
+
+alias emacs="$EMACS"
 alias p="pushd ."
 alias pp="popd"
 
@@ -78,5 +80,6 @@ export HISTSIZE=10000
 export HISTFILESIZE=10000
 
 export PATH=$HOME/bin/:$PATH
+export EDITOR="$EMACS"
 
 source <(kubectl completion bash)
