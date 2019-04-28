@@ -139,6 +139,7 @@
   :config
   (add-to-list 'recentf-exclude no-littering-etc-directory)
   (add-to-list 'recentf-exclude no-littering-var-directory)
+  (add-to-list 'recentf-exclude "COMMIT_EDITMSG")
   (recentf-mode 1))
 
 (use-package eldoc
@@ -154,6 +155,7 @@
   (exec-path-from-shell-initialize))
 
 (use-package ido
+  :defer 1
   :config
   (ido-mode 1)
   (ido-everywhere 1)
@@ -179,6 +181,7 @@
 
 (use-package which-key
   :ensure t
+  :defer 1
   :diminish which-key-mode
   :config
   (which-key-mode 1))
@@ -298,7 +301,7 @@
   :diminish company-mode
   :config
   (global-company-mode 1)
-  (setq company-minimum-prefix-length 0)
+  (setq company-minimum-prefix-length 1)
   (setq company-show-numbers t)
   (setq company-idle-delay 0.2)
   :hook (company-mode . company-quickhelp-mode)
