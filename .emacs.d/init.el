@@ -215,7 +215,7 @@
   :config
   (setq undo-tree-visualizer-relative-timestamps nil)
   (global-undo-tree-mode)
-  (global-set-key (kbd "C-x u") 'undo))
+  :bind (:map undo-tree-map ("C-x u" . 'undo)))
 
 (use-package all-the-icons
   :ensure t)
