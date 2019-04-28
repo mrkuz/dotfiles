@@ -64,8 +64,6 @@
 (setq-default scroll-error-top-bottom t)
 ; Try to keep position when scrolling
 (setq-default scroll-preserve-screen-position t)
-; Delete region when insert character
-(delete-selection-mode 1)
 ; Raise display time of suggestions
 (setq suggest-key-bindings 4)
 ; Enable drag and drop text via mouse
@@ -131,6 +129,10 @@
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
+(use-package try
+  :ensure t
+  :commands try)
+
 (use-package ido
   :defer 1
   :config
@@ -187,6 +189,10 @@
 (use-package expand-region
   :ensure t
   :commands expand-region)
+
+(use-package multiple-cursors
+  :ensure t
+  :commands mc/mark-all-like-this)
 
 (use-package all-the-icons
   :ensure t)
@@ -344,11 +350,13 @@
 (global-set-key (kbd "C-;") my-map)
 (global-set-key (kbd "C-ö") my-map)
 
+(define-key my-map (kbd "f i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
 (define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
 (define-key my-map (kbd "j c") 'ace-jump-word-mode)
 (define-key my-map (kbd "j l") 'ace-jump-line-mode)
 (define-key my-map (kbd "j w") 'ace-window)
+(define-key my-map (kbd "m") 'mc/mark-all-like-this)
 (define-key my-map (kbd "t t") 'treemacs)
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
 (define-key my-map (kbd "t o") 'treemacs-select-window)
