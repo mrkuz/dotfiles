@@ -100,6 +100,8 @@
 (global-hl-line-mode 1)
 ; Show matching parens
 (show-paren-mode 1)
+; Automatically close parens
+(electric-pair-mode 1)
 ; No dialog boxes
 (setq use-dialog-box nil)
 ; Disable GTK tooltips
@@ -122,6 +124,11 @@
 
 (use-package abbrev
   :diminish abbrev-mode)
+
+(use-package ibuffer
+  :config
+  (setq ibuffer-use-other-window t)
+  :bind (([remap list-buffers] . 'ibuffer)))
 
 (use-package exec-path-from-shell
   :ensure t
@@ -193,6 +200,22 @@
 (use-package multiple-cursors
   :ensure t
   :commands mc/mark-all-like-this)
+
+(use-package hungry-delete
+  :ensure t
+  :defer 1
+  :diminish hungry-delete-mode
+  :config
+  (global-hungry-delete-mode 1))
+
+(use-package undo-tree
+  :ensure t
+  :defer 1
+  :diminish undo-tree-mode
+  :config
+  (setq undo-tree-visualizer-relative-timestamps nil)
+  (global-undo-tree-mode)
+  (global-set-key (kbd "C-x u") 'undo))
 
 (use-package all-the-icons
   :ensure t)
@@ -346,6 +369,8 @@
 ;; Key bindings
 ;;--------------------------------------------------------------------------------------------------
 
+;;(global-set-key [remap list-buffers] 'ibuffer)
+
 (setq my-map (make-sparse-keymap))
 (global-set-key (kbd "C-;") my-map)
 (global-set-key (kbd "C-ö") my-map)
@@ -354,12 +379,14 @@
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
 (define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
 (define-key my-map (kbd "j c") 'ace-jump-word-mode)
+(define-key my-map (kbd "j i") 'imenu)
 (define-key my-map (kbd "j l") 'ace-jump-line-mode)
 (define-key my-map (kbd "j w") 'ace-window)
 (define-key my-map (kbd "m") 'mc/mark-all-like-this)
 (define-key my-map (kbd "t t") 'treemacs)
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
 (define-key my-map (kbd "t o") 'treemacs-select-window)
+(define-key my-map (kbd "u") 'undo-tree-visualize)
 (define-key my-map (kbd "v l") 'my-toggle-truncate-line)
 (define-key my-map (kbd "v t") 'awesome-tab-mode)
 (define-key my-map (kbd "v w") 'whitespace-mode)
