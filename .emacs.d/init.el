@@ -108,29 +108,6 @@
 (setq x-gtk-use-system-tooltips nil)
 
 ;;--------------------------------------------------------------------------------------------------
-;; Key bindings
-;;--------------------------------------------------------------------------------------------------
-
-(setq my-map (make-sparse-keymap))
-(global-set-key (kbd "C-;") my-map)
-(global-set-key (kbd "C-ö") my-map)
-
-(define-key my-map (kbd "h h") 'highlight-changes-mode)
-(define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
-(define-key my-map (kbd "v w") 'whitespace-mode)
-(define-key my-map (kbd "v l") 'my-toggle-truncate-line)
-
-(defun my-highlight-changes-remove-all ()
-  "Remove all changes."
-  (interactive)
-  (highlight-changes-remove-highlight (point-min) (point-max)))
-
-(defun my-toggle-truncate-line ()
-  "Toggle trunacte line."
-  (interactive)
-  (setq truncate-lines (if (not truncate-lines) t nil)))
-
-;;--------------------------------------------------------------------------------------------------
 ;; Packages
 ;;--------------------------------------------------------------------------------------------------
 
@@ -201,20 +178,15 @@
 
 (use-package ace-jump-mode
   :ensure t
-  :commands (ace-jump-word-mode ace-jump-line-mode)
-  :bind (:map my-map
-	      ("a j" . 'ace-jump-word-mode)
-	      ("a l" . 'ace-jump-line-mode)))
+  :commands (ace-jump-word-mode ace-jump-line-mode))
 
 (use-package ace-window
   :ensure t
-  :commands ace-windw
-  :bind (:map my-map ("a w" . 'ace-window)))
+  :commands ace-windw)
 
 (use-package expand-region
   :ensure t
-  :commands expand-region
-  :bind (:map my-map ("x" . 'er/expand-region)))
+  :commands expand-region)
 
 (use-package all-the-icons
   :ensure t)
@@ -257,8 +229,7 @@
   :commands awesome-tab-mode
   :config
   (setq awesome-tab-background-color "grey12")
-  (setq awesome-tab-style "bar")
-  :bind (:map my-map ("v t" . 'awesome-tab-mode)))
+  (setq awesome-tab-style "bar"))
 
 (use-package projectile
   :ensure t
@@ -286,10 +257,7 @@
   (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist"))
   :hook (treemacs-mode . (lambda () (linum-mode 0)))
   :hook (treemacs-mode . (lambda () (setq mode-line-format "")))
-  :bind (:map treemacs-mode-map ([mouse-1] . 'treemacs-single-click-expand-action))
-  :bind (:map my-map ("t t" . 'treemacs))
-  :bind (:map my-map ("t p" . 'treemacs-add-and-display-current-project))
-  :bind (:map my-map ("t o" . 'treemacs-select-window)))
+  :bind (:map treemacs-mode-map ([mouse-1] . 'treemacs-single-click-expand-action)))
 
 (use-package treemacs-projectile
   :ensure t
@@ -305,11 +273,7 @@
   (setq company-show-numbers t)
   (setq company-idle-delay 0.2)
   :hook (company-mode . company-quickhelp-mode)
-  :bind (
-	 :map
-	 company-active-map ("M-f" . 'company-flx-mode)
-	 :map
-	 my-map ("SPC" . 'company-complete)))
+  :bind (:map company-active-map ("M-f" . 'company-flx-mode)))
 
 (use-package company-flx
   :ensure t
@@ -328,8 +292,7 @@
   :after company
   :diminish yas-minor-mode
   :config
-  (yas-global-mode)
-  :bind (:map my-map ("TAB" . 'company-yasnippet)))
+  (yas-global-mode))
 
 (use-package yasnippet-snippets
   :ensure t
@@ -372,3 +335,36 @@
 
 (use-package lsp-java-treemacs
   :after lsp-mode treemacs)
+
+;;--------------------------------------------------------------------------------------------------
+;; Key bindings
+;;--------------------------------------------------------------------------------------------------
+
+(setq my-map (make-sparse-keymap))
+(global-set-key (kbd "C-;") my-map)
+(global-set-key (kbd "C-ö") my-map)
+
+(define-key my-map (kbd "h h") 'highlight-changes-mode)
+(define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
+(define-key my-map (kbd "j c") 'ace-jump-word-mode)
+(define-key my-map (kbd "j l") 'ace-jump-line-mode)
+(define-key my-map (kbd "j w") 'ace-window)
+(define-key my-map (kbd "t t") 'treemacs)
+(define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
+(define-key my-map (kbd "t o") 'treemacs-select-window)
+(define-key my-map (kbd "v l") 'my-toggle-truncate-line)
+(define-key my-map (kbd "v t") 'awesome-tab-mode)
+(define-key my-map (kbd "v w") 'whitespace-mode)
+(define-key my-map (kbd "x") 'er/expand-region)
+(define-key my-map (kbd "SPC") 'company-complete)
+(define-key my-map (kbd "TAB") 'company-yasnippet)
+
+(defun my-highlight-changes-remove-all ()
+  "Remove all changes."
+  (interactive)
+  (highlight-changes-remove-highlight (point-min) (point-max)))
+
+(defun my-toggle-truncate-line ()
+  "Toggle trunacte line."
+  (interactive)
+  (setq truncate-lines (if (not truncate-lines) t nil)))
