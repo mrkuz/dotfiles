@@ -71,7 +71,7 @@
 ; Tab width
 (setq-default tab-width 4)
 ; Always use spaces
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 ; Indent four spaces
 (setq tab-stop-list '(0 4))
 
@@ -302,7 +302,10 @@
   (setq company-show-numbers t)
   (setq company-idle-delay 0.2)
   :hook (company-mode . company-quickhelp-mode)
-  :bind (:map company-active-map ("M-f" . 'company-flx-mode)))
+  :bind (:map company-active-map
+              ("M-f" . 'company-flx-mode)
+              ("C-n" . 'company-select-next)
+              ("C-p" . 'company-select-previous)))
 
 (use-package company-flx
   :ensure t
