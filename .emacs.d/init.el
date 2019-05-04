@@ -355,7 +355,7 @@
 
 (use-package git-gutter
   :ensure t
-  :defer 1
+  :diminish git-gutter-mode
   :config
   (require 'git-gutter-fringe)
   (global-git-gutter-mode +1)
@@ -365,6 +365,11 @@
 (use-package git-gutter-fringe
   :ensure t
   :defer t)
+
+(use-package maven-test-mode
+  :ensure t
+  :diminish maven-test-mode
+  :hook (java-mode . maven-test-mode))
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (lsp)
