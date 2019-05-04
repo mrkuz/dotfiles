@@ -371,6 +371,18 @@
   :diminish maven-test-mode
   :hook (java-mode . maven-test-mode))
 
+(use-package rainbow-delimiters
+  :ensure t
+  :commands rainbow-delimiters-mode)
+
+(use-package auto-yasnippet
+  :ensure t
+  :commands (aya-create aya-expand))
+
+(use-package google-this
+  :ensure t
+  :commands google-this)
+
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (lsp)
 ;;--------------------------------------------------------------------------------------------------
@@ -419,6 +431,7 @@
 (define-key my-map (kbd "g p") 'git-gutter:previous-hunk)
 (define-key my-map (kbd "g r") 'git-gutter:revert-hunk)
 (define-key my-map (kbd "g t") 'git-gutter:toggle)
+(define-key my-map (kbd "G") 'google-this)
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
 (define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
 (define-key my-map (kbd "j c") 'ace-jump-word-mode)
@@ -430,6 +443,8 @@
 (define-key my-map (kbd "l o") 'lsp-organize-imports)
 (define-key my-map (kbd "l x") 'lsp-execute-code-action)
 (define-key my-map (kbd "m") 'mc/mark-all-like-this)
+(define-key my-map (kbd "s c") 'aya-create)
+(define-key my-map (kbd "s e") 'aya-expand)
 (define-key my-map (kbd "t t") 'treemacs)
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
 (define-key my-map (kbd "t o") 'treemacs-select-window)
