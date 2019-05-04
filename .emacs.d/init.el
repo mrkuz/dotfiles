@@ -254,9 +254,10 @@
   :ensure t
   :config
   (setq telephone-line-rhs
-	'((nil . (telephone-line-flycheck-segment telephone-line-misc-info-segment))
+        '((nil . (telephone-line-misc-info-segment))
+          (nil . ( telephone-line-flycheck-segment))
           (accent . (telephone-line-major-mode-segment))
-	  (nil . (telephone-line-minor-mode-segment))
+          (nil . (telephone-line-minor-mode-segment))
           (evil . (telephone-line-airline-position-segment))))
   (telephone-line-mode 1))
 
@@ -338,6 +339,19 @@
   :ensure t
   :after yasnippet)
 
+(use-package flycheck
+  :ensure t
+  :defer 1
+  :diminish flycheck-mode
+  :config
+  (global-flycheck-mode))
+
+(use-package flycheck-pos-tip
+  :ensure t
+  :after flycheck
+  :config
+  (flycheck-pos-tip-mode))
+
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (lsp)
 ;;--------------------------------------------------------------------------------------------------
@@ -347,7 +361,8 @@
   :commands lsp
   :config
   (setq lsp-auto-configure nil)
-  (lsp--flymake-setup))
+  (require 'lsp-ui-flycheck)
+  (lsp-ui-flycheck-enable t))
 
 (use-package company-lsp
   :ensure t
@@ -355,13 +370,10 @@
   :config
   (add-to-list 'company-backends 'company-lsp)
   (setq company-lsp-cache-candidates 'auto))
-  
+
 (use-package lsp-ui
   :ensure t
-  :after lsp-mode
-  :config
-  (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-doc-position 'at-point))
+  :after lsp-mode)
 
 (use-package lsp-java
   :ensure t
@@ -369,18 +381,14 @@
   :config
   (setq lsp-java-auto-build nil)
   (setq lsp-java-progress-report nil)
+  (setq lsp-eldoc-enable-signature-help nil)
   (setq lsp-java-server-install-dir (no-littering-expand-var-file-name "eclipse.jdt.ls/server"))
   (setq lsp-java-workspace-dir (no-littering-expand-var-file-name "workspace"))
   (setq lsp-java-workspace-cache-dir (no-littering-expand-var-file-name "workspace/cache")))
 
-(use-package lsp-java-treemacs
-  :after lsp-mode treemacs)
-
 ;;--------------------------------------------------------------------------------------------------
 ;; Key bindings
 ;;--------------------------------------------------------------------------------------------------
-
-;;(global-set-key [remap list-buffers] 'ibuffer)
 
 (setq my-map (make-sparse-keymap))
 (global-set-key (kbd "C-;") my-map)
@@ -393,6 +401,10 @@
 (define-key my-map (kbd "j i") 'imenu)
 (define-key my-map (kbd "j l") 'ace-jump-line-mode)
 (define-key my-map (kbd "j w") 'ace-window)
+(define-key my-map (kbd "l d") 'lsp-describe-thing-at-point)
+(define-key my-map (kbd "l f") 'lsp-format-buffer)
+(define-key my-map (kbd "l o") 'lsp-organize-imports)
+(define-key my-map (kbd "l x") 'lsp-execute-code-action)
 (define-key my-map (kbd "m") 'mc/mark-all-like-this)
 (define-key my-map (kbd "t t") 'treemacs)
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
@@ -415,3 +427,14 @@
   "Toggle trunacte line."
   (interactive)
   (setq truncate-lines (if (not truncate-lines) t nil)))
+
+;;--------------------------------------------------------------------------------------------------
+;; Fixes
+;;--------------------------------------------------------------------------------------------------
+
+(require 'ansi-color)
+(defun my-colorize-compilation ()
+  "Colorize compilation output"
+  (ansi-color-apply-on-region compilation-filter-start (point)))
+
+(add-hook 'compilation-filter-hook 'my-colorize-compilation)
