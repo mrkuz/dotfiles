@@ -74,7 +74,10 @@
 (setq-default indent-tabs-mode nil)
 ; Indent four spaces
 (setq tab-stop-list '(0 4))
-
+; Increase left fringe width
+(setq-default left-fringe-width 16)
+; Increase right fringe width
+(setq-default right-fringe-width 16)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Look and feel
@@ -84,8 +87,6 @@
 (tool-bar-mode 0)
 ; Disable blinking cursor
 (blink-cursor-mode 0)
-; Show line numbers in front of each row
-(global-linum-mode 1)
 ; Show column number in mode line
 (column-number-mode 1)
 ; Cycle through window configurations
@@ -352,6 +353,19 @@
   :config
   (flycheck-pos-tip-mode))
 
+(use-package git-gutter
+  :ensure t
+  :defer 1
+  :config
+  (require 'git-gutter-fringe)
+  (global-git-gutter-mode +1)
+  ; Show line numbers in front of each row
+  (global-linum-mode 1))
+
+(use-package git-gutter-fringe
+  :ensure t
+  :defer t)
+
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (lsp)
 ;;--------------------------------------------------------------------------------------------------
@@ -395,6 +409,11 @@
 (global-set-key (kbd "C-ö") my-map)
 
 (define-key my-map (kbd "f i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+(define-key my-map (kbd "g d") 'git-gutter:popup-hunk)
+(define-key my-map (kbd "g n") 'git-gutter:next-hunk)
+(define-key my-map (kbd "g p") 'git-gutter:previous-hunk)
+(define-key my-map (kbd "g r") 'git-gutter:revert-hunk)
+(define-key my-map (kbd "g t") 'git-gutter:toggle)
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
 (define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
 (define-key my-map (kbd "j c") 'ace-jump-word-mode)
