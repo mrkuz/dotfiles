@@ -145,7 +145,15 @@
   :config
   (ido-mode 1)
   (ido-everywhere 1)
-  (setq ido-enable-flex-matching t))
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-faces nil))
+
+(use-package ido-vertical-mode
+  :after ido
+  :config
+  (ido-vertical-mode)
+  (setq ido-vertical-indicator " >")
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
 (use-package ido-completing-read+
   :ensure t
@@ -203,10 +211,8 @@
 
 (use-package hungry-delete
   :ensure t
-  :defer 1
-  :diminish hungry-delete-mode
-  :config
-  (global-hungry-delete-mode 1))
+  :commands hungry-delete-backward
+  :diminish hungry-delete-mode)
 
 (use-package undo-tree
   :ensure t
@@ -394,6 +400,7 @@
 (define-key my-map (kbd "v t") 'awesome-tab-mode)
 (define-key my-map (kbd "v w") 'whitespace-mode)
 (define-key my-map (kbd "x") 'er/expand-region)
+(define-key my-map (kbd "DEL") 'hungry-delete-backward)
 (define-key my-map (kbd "SPC") 'company-complete)
 (define-key my-map (kbd "TAB") 'company-yasnippet)
 
