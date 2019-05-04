@@ -150,9 +150,10 @@
 
 (use-package ido-vertical-mode
   :after ido
+  :init
+  (setq ido-vertical-indicator " >")
   :config
   (ido-vertical-mode)
-  (setq ido-vertical-indicator " >")
   (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
 (use-package ido-completing-read+
@@ -330,7 +331,8 @@
   :after company
   :diminish yas-minor-mode
   :config
-  (yas-global-mode))
+  (setq yas-verbosity 2)
+  (yas-global-mode 1))
 
 (use-package yasnippet-snippets
   :ensure t
