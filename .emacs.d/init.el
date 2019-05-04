@@ -383,6 +383,9 @@
   :ensure t
   :commands google-this)
 
+(use-package magit
+  :commands magit-status)
+
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (lsp)
 ;;--------------------------------------------------------------------------------------------------
@@ -430,6 +433,7 @@
 (define-key my-map (kbd "g n") 'git-gutter:next-hunk)
 (define-key my-map (kbd "g p") 'git-gutter:previous-hunk)
 (define-key my-map (kbd "g r") 'git-gutter:revert-hunk)
+(define-key my-map (kbd "g s") 'magit-status)
 (define-key my-map (kbd "g t") 'git-gutter:toggle)
 (define-key my-map (kbd "G") 'google-this)
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
