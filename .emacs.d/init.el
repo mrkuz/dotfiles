@@ -173,7 +173,9 @@
   :ensure t
   :after ido
   :commands smex
-  :bind (( "M-x" . 'smex)))
+  :bind (
+         ( "M-x" . 'smex)
+         ( "M-X" . 'smex-major-mode-commands)))
 
 (use-package which-key
   :ensure t
@@ -430,6 +432,7 @@
 
 (define-key my-map (kbd "f i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 (define-key my-map (kbd "g d") 'git-gutter:popup-hunk)
+(define-key my-map (kbd "g m") 'magit-file-dispatch)
 (define-key my-map (kbd "g n") 'git-gutter:next-hunk)
 (define-key my-map (kbd "g p") 'git-gutter:previous-hunk)
 (define-key my-map (kbd "g r") 'git-gutter:revert-hunk)
@@ -462,7 +465,7 @@
 (define-key my-map (kbd "TAB") 'company-yasnippet)
 
 (defun my-highlight-changes-remove-all ()
-  "Remove all changes."
+  "Remove all highligts."
   (interactive)
   (highlight-changes-remove-highlight (point-min) (point-max)))
 
@@ -477,7 +480,7 @@
 
 (require 'ansi-color)
 (defun my-colorize-compilation ()
-  "Colorize compilation output"
+  "Colorize compilation output."
   (ansi-color-apply-on-region compilation-filter-start (point)))
 
 (add-hook 'compilation-filter-hook 'my-colorize-compilation)
