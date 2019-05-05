@@ -386,7 +386,14 @@
   :commands google-this)
 
 (use-package magit
+  :ensure t
   :commands magit-status)
+
+(use-package column-enforce-mode
+  :ensure t
+  :defer 1
+  :config
+  (100-column-rule))
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages (lsp)
