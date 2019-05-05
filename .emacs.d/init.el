@@ -429,6 +429,7 @@
 (define-key my-map (kbd "DEL") 'hungry-delete-backward)
 (define-key my-map (kbd "SPC") 'company-complete)
 (define-key my-map (kbd "TAB") 'company-yasnippet)
+(define-key my-map (kbd "?") 'which-key-show-top-level)
 
 (defun my-highlight-changes-remove-all ()
   "Remove all highligts."
