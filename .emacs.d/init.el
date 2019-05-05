@@ -11,17 +11,14 @@
   (package-install 'use-package))
 
 (require 'use-package)
+(setq use-package-always-ensure t)
 
 (use-package benchmark-init
-  :ensure t
   :config
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
-(use-package diminish
-  :ensure t)
-
-(use-package no-littering
-  :ensure t)
+(use-package diminish)
+(use-package no-littering)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Startup
@@ -108,6 +105,9 @@
 ; Disable GTK tooltips
 (setq x-gtk-use-system-tooltips nil)
 
+(diminish 'eldoc-mode)
+(diminish 'abbrev-mode)
+
 ;;--------------------------------------------------------------------------------------------------
 ;; Packages
 ;;--------------------------------------------------------------------------------------------------
@@ -120,25 +120,17 @@
   (add-to-list 'recentf-exclude "COMMIT_EDITMSG")
   (recentf-mode 1))
 
-(use-package eldoc
-  :diminish eldoc-mode)
-
-(use-package abbrev
-  :diminish abbrev-mode)
-
 (use-package ibuffer
   :config
   (setq ibuffer-use-other-window t)
   :bind (([remap list-buffers] . 'ibuffer)))
 
 (use-package exec-path-from-shell
-  :ensure t
   :config
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
 (use-package try
-  :ensure t
   :commands try)
 
 (use-package ido
@@ -158,19 +150,16 @@
   (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
 (use-package ido-completing-read+
-  :ensure t
   :after ido
   :config
   (ido-ubiquitous-mode 1))
 
 (use-package flx-ido
-  :ensure t
   :after ido
   :config
   (flx-ido-mode 1))
 
 (use-package smex
-  :ensure t
   :after ido
   :commands smex
   :bind (
@@ -178,14 +167,12 @@
          ( "M-X" . 'smex-major-mode-commands)))
 
 (use-package which-key
-  :ensure t
   :defer 1
   :diminish which-key-mode
   :config
   (which-key-mode 1))
 
 (use-package anzu
-  :ensure t
   :defer 1
   :diminish anzu-mode
   :config
@@ -198,28 +185,22 @@
 	 ([remap isearch-query-replace-regexp] . 'anzu-isearch-query-replace-regexp)))
 
 (use-package ace-jump-mode
-  :ensure t
   :commands (ace-jump-word-mode ace-jump-line-mode))
 
 (use-package ace-window
-  :ensure t
   :commands ace-windw)
 
 (use-package expand-region
-  :ensure t
   :commands expand-region)
 
 (use-package multiple-cursors
-  :ensure t
   :commands mc/mark-all-like-this)
 
 (use-package hungry-delete
-  :ensure t
   :commands hungry-delete-backward
   :diminish hungry-delete-mode)
 
 (use-package undo-tree
-  :ensure t
   :defer 1
   :diminish undo-tree-mode
   :config
@@ -227,24 +208,20 @@
   (global-undo-tree-mode)
   :bind (:map undo-tree-map ("C-x u" . 'undo)))
 
-(use-package all-the-icons
-  :ensure t)
+(use-package all-the-icons)
 
 (use-package doom-themes
-  :ensure t
   :after all-the-icons
   :config
   (load-theme 'doom-one 1)
   (doom-themes-treemacs-config))
 
 (use-package dashboard
-  :ensure t
   :config
   (setq dashboard-items '((recents . 5) (bookmarks . 5) (projects . 5)))
   (dashboard-setup-startup-hook))
 
 (use-package eyebrowse
-  :ensure t
   :defer 1
   :config
   (setq eyebrowse-mode-line-left-delimiter "")
@@ -254,7 +231,6 @@
   (eyebrowse-mode))
 
 (use-package telephone-line
-  :ensure t
   :config
   (setq telephone-line-rhs
         '((nil . (telephone-line-misc-info-segment))
@@ -272,7 +248,6 @@
   (setq awesome-tab-style "bar"))
 
 (use-package projectile
-  :ensure t
   :defer 1
   :diminish projectile-mode
   :config
@@ -282,7 +257,6 @@
   ("C-c p" . projectile-command-map))
 
 (use-package treemacs
-  :ensure t
   :commands treemacs
   :config
   (setq treemacs-python-executable (executable-find "python3"))
@@ -300,11 +274,9 @@
   :bind (:map treemacs-mode-map ([mouse-1] . 'treemacs-single-click-expand-action)))
 
 (use-package treemacs-projectile
-  :ensure t
   :after treemacs projectile)
 
 (use-package company
-  :ensure t
   :defer 1
   :diminish company-mode
   :config
@@ -319,11 +291,9 @@
               ("C-p" . 'company-select-previous)))
 
 (use-package company-flx
-  :ensure t
   :after company)
 
 (use-package company-quickhelp
-  :ensure t
   :after company
   :config
   (setq company-quickhelp-delay 1.2)
@@ -331,7 +301,6 @@
   (setq company-quickhelp-use-propertized-text t))
 
 (use-package yasnippet
-  :ensure t
   :after company
   :diminish yas-minor-mode
   :config
@@ -339,24 +308,20 @@
   (yas-global-mode 1))
 
 (use-package yasnippet-snippets
-  :ensure t
   :after yasnippet)
 
 (use-package flycheck
-  :ensure t
   :defer 1
   :diminish flycheck-mode
   :config
   (global-flycheck-mode))
 
 (use-package flycheck-pos-tip
-  :ensure t
   :after flycheck
   :config
   (flycheck-pos-tip-mode))
 
 (use-package git-gutter
-  :ensure t
   :diminish git-gutter-mode
   :config
   (require 'git-gutter-fringe)
@@ -365,32 +330,25 @@
   (global-linum-mode 1))
 
 (use-package git-gutter-fringe
-  :ensure t
   :defer t)
 
 (use-package maven-test-mode
-  :ensure t
   :diminish maven-test-mode
   :hook (java-mode . maven-test-mode))
 
 (use-package rainbow-delimiters
-  :ensure t
   :commands rainbow-delimiters-mode)
 
 (use-package auto-yasnippet
-  :ensure t
   :commands (aya-create aya-expand))
 
 (use-package google-this
-  :ensure t
   :commands google-this)
 
 (use-package magit
-  :ensure t
   :commands magit-status)
 
 (use-package column-enforce-mode
-  :ensure t
   :defer 1
   :config
   (100-column-rule))
@@ -400,7 +358,6 @@
 ;;--------------------------------------------------------------------------------------------------
 
 (use-package lsp-mode
-  :ensure t
   :commands lsp
   :config
   (setq lsp-auto-configure nil)
@@ -408,18 +365,15 @@
   (lsp-ui-flycheck-enable t))
 
 (use-package company-lsp
-  :ensure t
   :after lsp-mode company
   :config
   (add-to-list 'company-backends 'company-lsp)
   (setq company-lsp-cache-candidates 'auto))
 
 (use-package lsp-ui
-  :ensure t
   :after lsp-mode)
 
 (use-package lsp-java
-  :ensure t
   :after lsp-mode
   :config
   (setq lsp-java-auto-build nil)
