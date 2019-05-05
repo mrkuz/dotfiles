@@ -75,6 +75,10 @@
 (setq-default left-fringe-width 16)
 ; Increase right fringe width
 (setq-default right-fringe-width 16)
+; Start week with monday
+(setq calendar-week-start-day 1)
+; Use ISO date format
+(setq calendar-date-style 'iso)
 
 ;;--------------------------------------------------------------------------------------------------
 ;; Look and feel
