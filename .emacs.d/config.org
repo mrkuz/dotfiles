@@ -40,15 +40,6 @@
   (exec-path-from-shell-initialize))
 #+END_SRC
 
-* Startup screen
-
-#+BEGIN_SRC emacs-lisp
-;; Disable splash screen
-(setq inhibit-splash-screen t)
-;; Empty *scratch* buffer
-(setq initial-scratch-message nil)
-#+END_SRC
-
 * Backup / auto-save
 
 #+BEGIN_SRC emacs-lisp
@@ -70,6 +61,12 @@
 ** Miscellaneous
 
 #+BEGIN_SRC emacs-lisp
+;; Don't load default init
+(setq inhibit-default-init t)
+;; Disable splash screen
+(setq inhibit-splash-screen t)
+;; Empty *scratch* buffer
+(setq initial-scratch-message nil)
 ;; Always ask for y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; Enable all disabled commands
@@ -162,6 +159,15 @@
 #+BEGIN_SRC emacs-lisp
 (diminish 'eldoc-mode)
 (diminish 'abbrev-mode)
+#+END_SRC
+
+* Org mode
+
+#+BEGIN_SRC emacs-lisp
+;; Start org-mode indented
+(setq org-startup-indented t)
+;; Add CLOSED timestamp to DONE items
+(setq org-log-done 'time)
 #+END_SRC
 
 * Packages: Built-in
@@ -479,8 +485,8 @@
 (use-package flycheck
   :defer 1
   :diminish flycheck-mode
+  :hook (prog-mode . flycheck-mode)
   :config
-  (global-flycheck-mode)
   (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
 ;; Show flycheck errors as tooltip
