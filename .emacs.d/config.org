@@ -582,7 +582,7 @@
 (define-key my-map (kbd "f i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 (define-key my-map (kbd "f s") 'my-create-scratch)
 (define-key my-map (kbd "g d") 'git-gutter:popup-hunk)
-(define-key my-map (kbd "g m") 'magit-file-dispatch)
+(define-key my-map (kbd "g g") 'magit-file-dispatch)
 (define-key my-map (kbd "g n") 'git-gutter:next-hunk)
 (define-key my-map (kbd "g p") 'git-gutter:previous-hunk)
 (define-key my-map (kbd "g r") 'git-gutter:revert-hunk)
