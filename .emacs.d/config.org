@@ -517,6 +517,14 @@
 (use-package restclient
   :mode ("\\.rest\\'" . restclient-mode)
   :commands restclient-mode)
+
+(use-package ob-restclient
+  :after restclient)
+
+(use-package company-restclient
+  :after restclient company
+  :config
+  (add-to-list 'company-backends 'company-restclient))
 #+END_SRC
 
 * Packages: Database
@@ -526,6 +534,9 @@
   :commands inf-mongo
   :config
   (setq inf-mongo-command "mongo mongodb://127.0.1:27017"))
+
+(use-package ob-mongo
+  :defer t)
 #+END_SRC
 
 * Packages: LSP
