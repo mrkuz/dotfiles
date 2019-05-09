@@ -303,6 +303,9 @@
 
 (use-package ace-window
   :commands ace-windw)
+
+(use-package ace-link
+  :commands ace-link)
 #+END_SRC
 
 * Packages: Search
@@ -560,6 +563,7 @@
 (define-key my-map (kbd "G") 'google-this)
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
 (define-key my-map (kbd "h r") 'my-highlight-changes-remove-all)
+(define-key my-map (kbd "j a") 'ace-link-addr)
 (define-key my-map (kbd "j c") 'ace-jump-word-mode)
 (define-key my-map (kbd "j i") 'imenu)
 (define-key my-map (kbd "j l") 'ace-jump-line-mode)
@@ -578,6 +582,7 @@
 (define-key my-map (kbd "u") 'undo-tree-visualize)
 (define-key my-map (kbd "v l") 'my-toggle-truncate-line)
 (define-key my-map (kbd "v t") 'awesome-tab-mode)
+(define-key my-map (kbd "v u") 'goto-address-mode)
 (define-key my-map (kbd "v w") 'whitespace-mode)
 (define-key my-map (kbd "x") 'er/expand-region)
 (define-key my-map (kbd "DEL") 'hungry-delete-backward)
