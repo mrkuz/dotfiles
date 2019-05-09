@@ -186,6 +186,9 @@
   :config
   (setq ibuffer-use-other-window t)
   :bind (([remap list-buffers] . 'ibuffer)))
+
+(use-package hideshow
+  :hook (prog-mode . hs-minor-mode))
 #+END_SRC
 
 * Packages: Miscellaneous
@@ -499,6 +502,10 @@
 (use-package maven-test-mode
   :diminish maven-test-mode
   :hook (java-mode . maven-test-mode))
+
+;; Toggle code-folding
+(use-package fold-dwim
+  :commands fold-dwim-toggle)
 #+END_SRC
 
 * Packages: LSP
@@ -564,6 +571,7 @@
 (define-key my-map (kbd "m") 'mc/mark-all-like-this)
 (define-key my-map (kbd "s c") 'aya-create)
 (define-key my-map (kbd "s e") 'aya-expand)
+(define-key my-map (kbd "s i") 'company-yasnippet)
 (define-key my-map (kbd "t t") 'treemacs)
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
 (define-key my-map (kbd "t o") 'treemacs-select-window)
@@ -574,7 +582,7 @@
 (define-key my-map (kbd "x") 'er/expand-region)
 (define-key my-map (kbd "DEL") 'hungry-delete-backward)
 (define-key my-map (kbd "SPC") 'company-complete)
-(define-key my-map (kbd "TAB") 'company-yasnippet)
+(define-key my-map (kbd "TAB") 'fold-dwim-toggle)
 (define-key my-map (kbd "?") 'which-key-show-top-level)
 #+END_SRC
 
