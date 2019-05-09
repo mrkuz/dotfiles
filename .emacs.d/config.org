@@ -512,6 +512,20 @@
 ;; Toggle code-folding
 (use-package fold-dwim
   :commands fold-dwim-toggle)
+
+;; REST client
+(use-package restclient
+  :mode ("\\.rest\\'" . restclient-mode)
+  :commands restclient-mode)
+#+END_SRC
+
+* Packages: Database
+
+#+BEGIN_SRC emacs-lisp
+(use-package inf-mongo
+  :commands inf-mongo
+  :config
+  (setq inf-mongo-command "mongo mongodb://127.0.1:27017"))
 #+END_SRC
 
 * Packages: LSP
