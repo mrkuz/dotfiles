@@ -150,8 +150,6 @@
 #+BEGIN_SRC emacs-lisp
 ;; Highlight current line
 (global-hl-line-mode 1)
-;; Show matching parens
-(show-paren-mode 1)
 #+END_SRC
 
 ** Diminish
@@ -360,16 +358,20 @@
   (setq awesome-tab-background-color "grey12")
   (setq awesome-tab-style "bar"))
 
-;; Show colons in different colors
-(use-package rainbow-delimiters
-  :commands rainbow-delimiters-mode)
-
 ;; Colorize text beyond column 100
 (use-package column-enforce-mode
   :defer 1
   :diminish column-enforce-mode
   :config
   (100-column-rule))
+
+;; Highlight surrounding parens
+(use-package highlight-parentheses
+  :defer 1
+  :config
+  (setq hl-paren-colors '("IndianRed1"))
+  (setq hl-paren-highlight-adjacent t)
+  (global-highlight-parentheses-mode))
 
 ;; Show indention guides
 (use-package indent-guide
@@ -391,7 +393,7 @@
   (set-face-attribute 'treemacs-root-face nil :height 1.0 :underline nil)
   ;; Customize root icon
   (setq treemacs-icon-root-png
-	(concat " "
+    (concat " "
 		(all-the-icons-octicon "repo" :v-adjust -0.1 :height 1.2 :face 'font-lock-string-face)
                 " "))
   ;; Collapse directories
