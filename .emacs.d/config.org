@@ -188,6 +188,7 @@
   :bind (([remap list-buffers] . 'ibuffer)))
 
 (use-package hideshow
+  :diminish hs-minor-mode
   :hook (prog-mode . hs-minor-mode))
 #+END_SRC
 
@@ -368,6 +369,7 @@
 ;; Highlight surrounding parens
 (use-package highlight-parentheses
   :defer 1
+  :diminish highlight-parentheses-mode
   :config
   (setq hl-paren-colors '("IndianRed1"))
   (setq hl-paren-highlight-adjacent t)
@@ -376,6 +378,7 @@
 ;; Show indention guides
 (use-package indent-guide
   :defer 1
+  :diminish indent-guide-mode
   :custom-face (indent-guide-face ((t (:inherit linum))))
   :config
   (setq indent-guide-char "│")
