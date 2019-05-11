@@ -168,6 +168,8 @@
 (setq org-startup-indented t)
 ;; Add CLOSED timestamp to DONE items
 (setq org-log-done 'time)
+;; Don't indent lines after editing
+(setq org-edit-src-content-indentation 0)
 #+END_SRC
 
 * Packages: Built-in
@@ -545,7 +547,9 @@
 (use-package lsp-mode
   :commands lsp
   :config
+  (setq lsp-auto-execute-action nil)
   (setq lsp-auto-configure nil)
+  (setq lsp-eldoc-enable-signature-help nil)
   (require 'lsp-ui-flycheck)
   (lsp-ui-flycheck-enable t))
 
@@ -563,7 +567,6 @@
   :config
   (setq lsp-java-auto-build nil)
   (setq lsp-java-progress-report nil)
-  (setq lsp-eldoc-enable-signature-help nil)
   (setq lsp-java-server-install-dir (no-littering-expand-var-file-name "eclipse.jdt.ls/server"))
   (setq lsp-java-workspace-dir (no-littering-expand-var-file-name "workspace"))
   (setq lsp-java-workspace-cache-dir (no-littering-expand-var-file-name "workspace/cache")))
