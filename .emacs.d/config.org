@@ -439,7 +439,6 @@
 (use-package company
   :defer 1
   :diminish company-mode
-  :hook (company-mode . company-quickhelp-mode)
   :bind (:map company-active-map
               ("M-f" . 'company-flx-mode)
               ("C-n" . 'company-select-next)
@@ -458,6 +457,7 @@
 
 (use-package company-quickhelp
   :after company
+  :hook (company-mode . company-quickhelp-mode)
   :config
   (setq company-quickhelp-delay 1.2)
   (setq company-quickhelp-max-lines 20)
@@ -585,6 +585,12 @@
   (setq lsp-java-server-install-dir (no-littering-expand-var-file-name "eclipse.jdt.ls/server"))
   (setq lsp-java-workspace-dir (no-littering-expand-var-file-name "workspace"))
   (setq lsp-java-workspace-cache-dir (no-littering-expand-var-file-name "workspace/cache")))
+
+(use-package dap-mode
+  :after lsp-mode
+  :hook ((lsp-mode . (lambda () (dap-mode) (dap-ui-mode))))
+  :config
+  (require 'dap-java))
 #+END_SRC
 
 * My keymap
@@ -594,8 +600,22 @@
 (global-set-key (kbd "C-;") my-map)
 (global-set-key (kbd "C-ö") my-map)
 
-(define-key my-map (kbd "d l") 'desktop-read)
-(define-key my-map (kbd "d s") 'desktop-save-in-desktop-dir)
+(define-key my-map (kbd "d d") 'dap-debug)
+(define-key my-map (kbd "d D") 'dap-disconnect)
+(define-key my-map (kbd "d b") 'dap-breakpoint-toggle)
+(define-key my-map (kbd "d B") 'dap-ui-breakpoints)
+(define-key my-map (kbd "d c") 'dap-continue)
+(define-key my-map (kbd "d e") 'dap-eval)
+(define-key my-map (kbd "d i") 'dap-step-in)
+(define-key my-map (kbd "d I") 'dap-ui-inspect)
+(define-key my-map (kbd "d L") 'dap-ui-locals)
+(define-key my-map (kbd "d n") 'dap-next)
+(define-key my-map (kbd "d o") 'dap-step-out)
+(define-key my-map (kbd "d O") 'dap-go-to-output-buffer)
+(define-key my-map (kbd "d R") 'dap-repl)
+(define-key my-map (kbd "d t") 'dap-switch-thread)
+(define-key my-map (kbd "D l") 'desktop-read)
+(define-key my-map (kbd "D s") 'desktop-save-in-desktop-dir)
 (define-key my-map (kbd "f c") (lambda () (interactive) (find-file "~/.emacs.d/config.org")))
 (define-key my-map (kbd "f i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 (define-key my-map (kbd "f s") 'my-create-scratch)
