@@ -218,6 +218,10 @@
   :commands hungry-delete-backward
   :diminish hungry-delete-mode)
 
+;; Underscore/upcase/camelcase conversion
+(use-package string-inflection
+  :commands string-inflection-all-cycle)
+
 ;; Store undo history in tree structure
 (use-package undo-tree
   :defer 1
@@ -602,6 +606,12 @@
 (global-set-key (kbd "C-;") my-map)
 (global-set-key (kbd "C-ö") my-map)
 
+(define-key my-map (kbd "M-c") 'string-inflection-lower-camelcase)
+(define-key my-map (kbd "M-C") 'string-inflection-camelcase)
+(define-key my-map (kbd "M-l") 'string-inflection-kebab-case)
+(define-key my-map (kbd "M-u") 'string-inflection-underscore)
+(define-key my-map (kbd "M-U") 'string-inflection-upcase)
+(define-key my-map (kbd "M-x") 'string-inflection-all-cycle)
 (define-key my-map (kbd "d d") 'dap-debug)
 (define-key my-map (kbd "d D") 'dap-disconnect)
 (define-key my-map (kbd "d b") 'dap-breakpoint-toggle)
