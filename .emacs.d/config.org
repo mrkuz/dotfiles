@@ -61,6 +61,8 @@
 ** Miscellaneous
 
 #+BEGIN_SRC emacs-lisp
+;; Increace GC threshold
+(setq gc-cons-threshold 80000000)
 ;; Don't load default init
 (setq inhibit-default-init t)
 ;; Disable splash screen
