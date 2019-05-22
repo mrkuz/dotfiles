@@ -548,6 +548,17 @@
   :after restclient company
   :config
   (add-to-list 'company-backends 'company-restclient))
+
+(use-package plantuml-mode
+  :commands plantuml-mode
+  :config
+  (setq plantuml-jar-path "~/opt/plantuml/plantuml.jar"))
+
+(use-package groovy-mode
+  :commands groovy-mode
+  :mode (("\\.groovy\\'" . groovy-mode)
+         ("\\.gradle\\'" . groovy-mode)))
+
 #+END_SRC
 
 * Packages: Database
