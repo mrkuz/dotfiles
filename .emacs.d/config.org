@@ -170,6 +170,8 @@
 (setq org-log-done 'time)
 ;; Don't indent lines after editing
 (setq org-edit-src-content-indentation 0)
+;; Don't ask for confirmation on evaluate
+(setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
 * Packages: Built-in
@@ -552,7 +554,8 @@
 (use-package plantuml-mode
   :commands plantuml-mode
   :config
-  (setq plantuml-jar-path "~/opt/plantuml/plantuml.jar"))
+  (setq plantuml-jar-path "~/opt/plantuml/plantuml.jar")
+  (setq org-plantuml-jar-path plantuml-jar-path))
 
 (use-package groovy-mode
   :commands groovy-mode
