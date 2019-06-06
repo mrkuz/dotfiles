@@ -240,11 +240,13 @@
 ;; Switch between frame configurations (like screen)
 (use-package eyebrowse
   :defer 1
+  :init
+  (setq eyebrowse-keymap-prefix "w")
   :config
   (setq eyebrowse-mode-line-left-delimiter "")
   (setq eyebrowse-mode-line-right-delimiter "")
   (setq eyebrowse-mode-line-separator " ")
-  (setq eyebrowse-new-workspace t)
+  (setq eyebrowse-new-workspace 'my-create-scratch)
   (eyebrowse-mode))
 #+END_SRC
 
