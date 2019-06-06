@@ -586,6 +586,11 @@
 #+BEGIN_SRC emacs-lisp
 (use-package lsp-mode
   :commands lsp
+  :bind (:map lsp-mode-map
+              ("C-c l d" . 'lsp-describe-thing-at-point)
+              ("C-c l f" . 'lsp-format-buffer)
+              ("C-c l o" . 'lsp-organize-imports)
+              ("C-c l x" .  'lsp-execute-code-action))
   :config
   (setq lsp-auto-execute-action nil)
   (setq lsp-auto-configure nil)
@@ -614,6 +619,20 @@
 (use-package dap-mode
   :after lsp-mode
   :hook ((lsp-mode . (lambda () (dap-mode) (dap-ui-mode))))
+  :bind (:map dap-mode-map
+              ("C-c d D" .  'dap-disconnect)
+              ("C-c d b" .  'dap-breakpoint-toggle)
+              ("C-c d B" . 'dap-ui-breakpoints)
+              ("C-c d c" . 'dap-continue)
+              ("C-c d e" . 'dap-eval)
+              ("C-c d i" . 'dap-step-in)
+              ("C-c d I" . 'dap-ui-inspect)
+              ("C-c d L" . 'dap-ui-locals)
+              ("C-c d n" . 'dap-next)
+              ("C-c d o" . 'dap-step-out)
+              ("C-c d O" . 'dap-go-to-output-buffer)
+              ("C-c d R" . 'dap-repl)
+              ("C-c d t" . 'dap-switch-thread))
   :config
   (require 'dap-java))
 #+END_SRC
@@ -632,19 +651,7 @@
 (define-key my-map (kbd "M-U") 'string-inflection-upcase)
 (define-key my-map (kbd "M-x") 'string-inflection-all-cycle)
 (define-key my-map (kbd "d d") 'dap-debug)
-(define-key my-map (kbd "d D") 'dap-disconnect)
-(define-key my-map (kbd "d b") 'dap-breakpoint-toggle)
-(define-key my-map (kbd "d B") 'dap-ui-breakpoints)
-(define-key my-map (kbd "d c") 'dap-continue)
-(define-key my-map (kbd "d e") 'dap-eval)
-(define-key my-map (kbd "d i") 'dap-step-in)
-(define-key my-map (kbd "d I") 'dap-ui-inspect)
-(define-key my-map (kbd "d L") 'dap-ui-locals)
-(define-key my-map (kbd "d n") 'dap-next)
-(define-key my-map (kbd "d o") 'dap-step-out)
-(define-key my-map (kbd "d O") 'dap-go-to-output-buffer)
-(define-key my-map (kbd "d R") 'dap-repl)
-(define-key my-map (kbd "d t") 'dap-switch-thread)
+(define-key my-map (kbd "d l") 'lsp)
 (define-key my-map (kbd "D l") 'desktop-read)
 (define-key my-map (kbd "D s") 'desktop-save-in-desktop-dir)
 (define-key my-map (kbd "f c") (lambda () (interactive) (find-file "~/.emacs.d/config.org")))
@@ -666,10 +673,6 @@
 (define-key my-map (kbd "j i") 'imenu)
 (define-key my-map (kbd "j l") 'ace-jump-line-mode)
 (define-key my-map (kbd "j w") 'ace-window)
-(define-key my-map (kbd "l d") 'lsp-describe-thing-at-point)
-(define-key my-map (kbd "l f") 'lsp-format-buffer)
-(define-key my-map (kbd "l o") 'lsp-organize-imports)
-(define-key my-map (kbd "l x") 'lsp-execute-code-action)
 (define-key my-map (kbd "m") 'mc/mark-all-like-this)
 (define-key my-map (kbd "o a") 'org-agenda)
 (define-key my-map (kbd "o c") 'org-capture)
