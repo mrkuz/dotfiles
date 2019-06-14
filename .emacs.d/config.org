@@ -392,7 +392,7 @@
 (use-package indent-guide
   :defer 1
   :diminish indent-guide-mode
-  :custom-face (indent-guide-face ((t (:inherit linum))))
+  :custom-face (indent-guide-face ((t (:inherit line-number))))
   :config
   (setq indent-guide-char "│")
   (indent-guide-global-mode))
@@ -400,7 +400,7 @@
 ;; Tree layout explorer
 (use-package treemacs
   :commands treemacs
-  :hook (treemacs-mode . (lambda () (linum-mode 0)))
+  :hook (treemacs-mode . (lambda () (display-line-numbers-mode 0)))
   :hook (treemacs-mode . (lambda () (setq mode-line-format "")))
   :bind (:map treemacs-mode-map ([mouse-1] . 'treemacs-single-click-expand-action))
   :config
@@ -511,7 +511,7 @@
   (require 'git-gutter-fringe)
   (global-git-gutter-mode +1)
   ;; Show line numbers in front of each row (has to be called after activation git-gutter mode)
-  (global-linum-mode 1))
+  (global-display-line-numbers-mode 1))
 
 (use-package magit
   :commands magit-status)
