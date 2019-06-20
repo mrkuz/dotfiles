@@ -61,6 +61,7 @@
 ** Miscellaneous
 
 #+BEGIN_SRC emacs-lisp
+(setq initial-frame-alist '((left . 450) (top . 150) (width . 100) (height . 50)))
 ;; Increace GC threshold
 (setq gc-cons-threshold 80000000)
 ;; Don't load default init
