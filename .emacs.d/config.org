@@ -352,16 +352,35 @@
   (load-theme 'doom-one 1)
   (doom-themes-treemacs-config))
 
-;; Powerline clone
-(use-package telephone-line
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
   :config
-  (setq telephone-line-rhs
-        '((nil . (telephone-line-misc-info-segment))
-          (nil . ( telephone-line-flycheck-segment))
-          (accent . (telephone-line-major-mode-segment))
-          (nil . (telephone-line-minor-mode-segment))
-          (evil . (telephone-line-airline-position-segment))))
-  (telephone-line-mode 1))
+  (setq doom-modeline-bar-width 1)
+  (setq doom-modeline-height 22)
+  (setq doom-modeline-icon nil)
+  (setq doom-modeline-minor-modes t)
+
+  (defun doom-modeline-refresh-bars (&optional width height)
+    (setq doom-modeline--bar-active
+          (doom-modeline--make-xpm 'doom-modeline-inactive-bar
+                                   (or width doom-modeline-bar-width)
+                                   (or height doom-modeline-height))
+          doom-modeline--bar-inactive
+          (doom-modeline--make-xpm 'doom-modeline-inactive-bar
+                                   (or width doom-modeline-bar-width)
+                                   (or height doom-modeline-height))))
+
+  (doom-modeline-def-segment matches-without-buffer-size
+    (concat (doom-modeline--macro-recording)
+            (doom-modeline--anzu)
+            (doom-modeline--evil-substitute)
+            (doom-modeline--iedit)
+            (doom-modeline--symbol-overlay)
+            (doom-modeline--multiple-cursors)))
+  (doom-modeline-def-modeline 'my-modeline
+    '(bar workspace-name window-number modals matches-without-buffer-size buffer-info remote-host selection-info)
+    '(buffer-position objed-state misc-info persp-name debug lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs checker bar))
+  (add-hook 'doom-modeline-mode-hook (lambda () (doom-modeline-set-modeline 'my-modeline 'default))))
 
 ;; Tabbar
 (use-package awesome-tab
