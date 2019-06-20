@@ -656,7 +656,8 @@
   (require 'dap-java))
 #+END_SRC
 
-* My keymap
+* My key
+map
 
 #+BEGIN_SRC emacs-lisp
 (setq my-map (make-sparse-keymap))
@@ -696,6 +697,7 @@
 (define-key my-map (kbd "o a") 'org-agenda)
 (define-key my-map (kbd "o c") 'org-capture)
 (define-key my-map (kbd "O") 'ido-occur)
+(define-key my-map (kbd "R") (lambda () (interactive ) (org-babel-load-file "~/.emacs.d/config.org")))
 (define-key my-map (kbd "s c") 'aya-create)
 (define-key my-map (kbd "s e") 'aya-expand)
 (define-key my-map (kbd "s i") 'company-yasnippet)
