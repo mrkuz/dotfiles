@@ -270,7 +270,7 @@ Keybindings:
 - =T=: Displays timestamp
 - =D=: Show diff
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 ;; Store undo history in tree structure
 (use-package undo-tree
   :defer 1
@@ -285,6 +285,8 @@ Keybindings:
 
 * Packages: IDO
 
+** Miscellaneous
+
 #+BEGIN_SRC emacs-lisp
 (use-package ido
   :defer 1
@@ -292,18 +294,22 @@ Keybindings:
   (ido-mode 1)
   ;; Use ido for all buffer/file operations
   (ido-everywhere 1)
-  ;; Enable flex matching
+  ;; Enable fuzzy matching
   (setq ido-enable-flex-matching t)
   ;; Disable default faces (we use flx-ido)
   (setq ido-use-faces nil)
+  ;; Use file at point for finding files
   (setq ido-use-filename-at-point 'guess))
 
+;; Show completions vertically
 (use-package ido-vertical-mode
   :after ido
   :init
+  ;; Customize indicator
   (setq ido-vertical-indicator " >")
   :config
   (ido-vertical-mode)
+  ;; Enable C-n/C-p key bindings
   (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
 ;; Use ido everywhere
@@ -312,27 +318,40 @@ Keybindings:
   :config
   (ido-ubiquitous-mode 1))
 
-;; Fuzzy matching
+;; Improved fuzzy matching
 (use-package flx-ido
   :after ido
   :config
   (flx-ido-mode 1))
 
+;; Interactively show occurences
+(use-package ido-occur
+  :commands ido-occur)
+#+END_SRC
+
+** Smex
+
+Replacement for M-x. Remembers recently used commands.
+
+Keybindings:
+
+- =C-h f=: Describe function
+- =M-.=: Go to function definition
+- =C-h w=: Show key binding
+
+#+BEGIN_SRC emacs-lisp
 (use-package smex
   :after ido
   :commands smex
   :bind (
          ( "M-x" . 'smex)
          ( "M-X" . 'smex-major-mode-commands)))
-
-(use-package ido-occur
-  :commands ido-occur)
 #+END_SRC
 
 * Packages: Help
 
 #+BEGIN_SRC emacs-lisp
-;; Show available keys
+;; Show available key bindings based on your current input
 (use-package which-key
   :defer 1
   :diminish which-key-mode
@@ -349,12 +368,19 @@ Keybindings:
 * Packages: Navigation
 
 #+BEGIN_SRC emacs-lisp
+
+;; Jump to a word/line by using a single character
 (use-package ace-jump-mode
   :commands (ace-jump-word-mode ace-jump-line-mode))
 
+;; Jump to a window by using a single character
 (use-package ace-window
-  :commands ace-windw)
+  :commands ace-windw
+  :config
+  ;; Use letters instead of numbers
+  (setq aw-keys '(?a ?b ?c ?d ?e ?f ?g ?h)))
 
+;; Visit a link by using a single character
 (use-package ace-link
   :commands ace-link)
 #+END_SRC
@@ -362,7 +388,7 @@ Keybindings:
 * Packages: Search
 
 #+BEGIN_SRC emacs-lisp
-;; Show number of occurances in modeline
+;; Show number of matches in modeline
 (use-package anzu
   :defer 1
   :diminish anzu-mode
@@ -379,22 +405,32 @@ Keybindings:
 * Packages: Look and feel
 
 #+BEGIN_SRC emacs-lisp
+
+;; Icon collection
 (use-package all-the-icons)
 
+;; Doom theme
 (use-package doom-themes
   :after all-the-icons
   :config
   (load-theme 'doom-one 1)
+  ;; Theme treemacs
   (doom-themes-treemacs-config))
 
+;; Doom modeline
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :config
+  ;; Set width of modeline bar
   (setq doom-modeline-bar-width 1)
+  ;; Set modeline height
   (setq doom-modeline-height 22)
+  ;; Don't use icons
   (setq doom-modeline-icon nil)
+  ;; Show minor modes
   (setq doom-modeline-minor-modes t)
 
+  ;; Hack: Overwrite function make bar invisible and force the configured height
   (defun doom-modeline-refresh-bars (&optional width height)
     (setq doom-modeline--bar-active
           (doom-modeline--make-xpm 'doom-modeline-inactive-bar
@@ -405,43 +441,39 @@ Keybindings:
                                    (or width doom-modeline-bar-width)
                                    (or height doom-modeline-height))))
 
+  ;; Customize modeline
   (doom-modeline-def-modeline 'my-modeline
     '(bar workspace-name window-number modals matches buffer-info remote-host selection-info)
     '(buffer-position objed-state misc-info persp-name debug lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs checker bar))
   (add-hook 'doom-modeline-mode-hook (lambda () (doom-modeline-set-modeline 'my-modeline 'default))))
-
-;; Tabbar
-(use-package awesome-tab
-  :load-path "site-lisp/awesome-tab/"
-  :commands awesome-tab-mode
-  :config
-  (setq awesome-tab-background-color "grey12")
-  (setq awesome-tab-style "bar"))
-
-;; Colorize text beyond column 100
-(use-package column-enforce-mode
-  :defer 1
-  :diminish column-enforce-mode
-  :config
-  (100-column-rule))
 
 ;; Highlight surrounding parens
 (use-package highlight-parentheses
   :defer 1
   :diminish highlight-parentheses-mode
   :config
+  ;; Customize color
   (setq hl-paren-colors '("IndianRed1"))
+  ;; Highlight parens right before cursor
   (setq hl-paren-highlight-adjacent t)
   (global-highlight-parentheses-mode))
 
+;; Show fill column
+(use-package fill-column-indicator
+  :diminish fci-mode
+  :commands fci-mode
+  :config
+  ;; Customize color
+  (setq fci-rule-color "#3f444a"))
+
 ;; Show indention guides
 (use-package indent-guide
-  :defer 1
   :diminish indent-guide-mode
+  :commands indent-guide-mode
   :custom-face (indent-guide-face ((t (:inherit line-number))))
   :config
-  (setq indent-guide-char "│")
-  (indent-guide-global-mode))
+  ;; Use custom character to show lines without gap
+  (setq indent-guide-char "│"))
 
 ;; Tree layout explorer
 (use-package treemacs
@@ -450,6 +482,7 @@ Keybindings:
   :hook (treemacs-mode . (lambda () (setq mode-line-format "")))
   :bind (:map treemacs-mode-map ([mouse-1] . 'treemacs-single-click-expand-action))
   :config
+  ;; Use python 3
   (setq treemacs-python-executable (executable-find "python3"))
   ;; Customize face of root item
   (set-face-attribute 'treemacs-root-face nil :height 1.0 :underline nil)
@@ -460,9 +493,11 @@ Keybindings:
                 " "))
   ;; Collapse directories
   (setq treemacs-collapse-dirs 10)
+  ;; Set window width
   (setq treemacs-width 30)
   ;; Exclude from 'other window' operations
   (setq treemacs-is-never-other-window t)
+  ;; Path to persistance file
   (setq treemacs-persist-file (no-littering-expand-var-file-name "treemacs-persist")))
 #+END_SRC
 
@@ -734,8 +769,9 @@ map
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
 (define-key my-map (kbd "t o") 'treemacs-select-window)
 (define-key my-map (kbd "u") 'undo-tree-visualize)
+(define-key my-map (kbd "v f") 'fci-mode)
+(define-key my-map (kbd "v i") 'indent-guide-mode)
 (define-key my-map (kbd "v l") 'my-toggle-truncate-line)
-(define-key my-map (kbd "v t") 'awesome-tab-mode)
 (define-key my-map (kbd "v u") 'goto-address-mode)
 (define-key my-map (kbd "v w") 'whitespace-mode)
 (define-key my-map (kbd "x") 'er/expand-region)
