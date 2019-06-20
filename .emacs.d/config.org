@@ -49,22 +49,6 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
   (exec-path-from-shell-initialize))
 #+END_SRC
 
-* Backup / auto-save
-
-#+BEGIN_SRC emacs-lisp
-;; Disable backup files
-(setq make-backup-files nil)
-;; Disable auto save
-(setq auto-save-default nil)
-#+END_SRC
-
-* File paths
-
-#+BEGIN_SRC emacs-lisp
-;; Customization file
-(setq custom-file (no-littering-expand-etc-file-name "custom"))
-#+END_SRC
-
 * General settings
 
 ** Miscellaneous
@@ -74,6 +58,10 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq initial-frame-alist '((left . 450) (top . 150) (width . 100) (height . 50)))
 ;; Increase GC threshold
 (setq gc-cons-threshold 80000000)
+;; Disable backup files
+(setq make-backup-files nil)
+;; Disable auto save
+(setq auto-save-default nil)
 ;; Don't load default init
 (setq inhibit-default-init t)
 ;; Disable splash screen
@@ -129,6 +117,13 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq calendar-date-style 'iso)
 #+END_SRC
 
+** File paths
+
+#+BEGIN_SRC emacs-lisp
+;; Customization file
+(setq custom-file (no-littering-expand-etc-file-name "custom"))
+#+END_SRC
+
 * Look and feel
 
 ** Miscellaneous
@@ -140,14 +135,10 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (blink-cursor-mode 0)
 ;; Show column number in mode line
 (column-number-mode 1)
-;; Cycle through window configurations
-(winner-mode 1)
 ;; Disable menu bar
 (menu-bar-mode 0)
 ;; Disable scroll bar
 (scroll-bar-mode 0)
-;; Show size in mode line
-(size-indication-mode 1)
 ;; No dialog boxes
 (setq use-dialog-box nil)
 ;; Disable GTK tooltips
@@ -170,6 +161,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 #+BEGIN_SRC emacs-lisp
 (diminish 'eldoc-mode)
 (diminish 'abbrev-mode)
+(diminish 'org-indent-mode)
 #+END_SRC
 
 * Org mode
@@ -183,35 +175,47 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq org-edit-src-content-indentation 0)
 ;; Don't ask for confirmation on evaluate
 (setq org-confirm-babel-evaluate nil)
+;; Set org directory
 (setq org-directory "~/org")
+;; Set the default file for notes
 (setq org-default-notes-file (concat org-directory "/notes.org"))
+;; Add all files in the org directory to the agenda
 (setq org-agenda-files '("."))
+;; Enable auto-fill-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
 #+END_SRC
 
 * Packages: Built-in
 
 #+BEGIN_SRC emacs-lisp
+
+;; Keep track of recently opened files
 (use-package recentf
   :after no-littering
   :config
   (add-to-list 'recentf-exclude no-littering-etc-directory)
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude "COMMIT_EDITMSG")
+  (add-to-list 'recentf-exclude ".*-autoloads\\.el")
   (recentf-mode 1))
 
+;; Improved buffer switching
 (use-package ibuffer
   :defer 1
   :config
+  ;; Always use new window
   (setq ibuffer-use-other-window t)
   :bind (([remap list-buffers] . 'ibuffer)))
 
+;; Enable code folding
 (use-package hideshow
   :diminish hs-minor-mode
   :hook (prog-mode . hs-minor-mode))
 #+END_SRC
 
-* Packages: Miscellaneous
+* Packages: Usability
+
+** Miscellaneous
 
 #+BEGIN_SRC emacs-lisp
 ;; Try packages without installation
@@ -222,13 +226,15 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (use-package google-this
   :commands google-this)
 
-;; Expand region step-by-step
+;; Expands region step-by-step
 (use-package expand-region
   :commands expand-region)
 
 ;; Activate multiple cursors
 (use-package multiple-cursors
-  :commands mc/mark-all-like-this)
+  :commands (mc/mark-all-like-this
+             mc/mark-all-dwim
+             mc/mark-next-like-this))
 
 ;; Allow hungry delete everywhere
 (use-package hungry-delete
@@ -239,27 +245,42 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (use-package string-inflection
   :commands string-inflection-all-cycle)
 
+;; Switch between frame configurations (like screen/tmux)
+(use-package eyebrowse
+  :defer 1
+  :init
+  ;; Use "C-c w" as prefix
+  (setq eyebrowse-keymap-prefix "w")
+  :config
+  ;; Customize modeline display
+  (setq eyebrowse-mode-line-left-delimiter "")
+  (setq eyebrowse-mode-line-right-delimiter "")
+  (setq eyebrowse-mode-line-separator " ")
+  ;; Create a scratch buffer for new workspaces
+  (setq eyebrowse-new-workspace 'my-create-scratch)
+  (eyebrowse-mode))
+#+END_SRC
+
+** Undo tree
+
+Stores undo history in a tree like structure and allows simple navigation through it.
+
+Keybindings:
+
+- =T=: Displays timestamp
+- =D=: Show diff
+
+#+BEGIN_SRC elisp
 ;; Store undo history in tree structure
 (use-package undo-tree
   :defer 1
   :diminish undo-tree-mode
-  ;; Restore default undo key binding
+  ;; Restore standard undo key binding, we use a custom one for this
   :bind (:map undo-tree-map ("C-x u" . 'undo))
   :config
+  ;; Hide timestamps per default
   (setq undo-tree-visualizer-relative-timestamps nil)
   (global-undo-tree-mode))
-
-;; Switch between frame configurations (like screen)
-(use-package eyebrowse
-  :defer 1
-  :init
-  (setq eyebrowse-keymap-prefix "w")
-  :config
-  (setq eyebrowse-mode-line-left-delimiter "")
-  (setq eyebrowse-mode-line-right-delimiter "")
-  (setq eyebrowse-mode-line-separator " ")
-  (setq eyebrowse-new-workspace 'my-create-scratch)
-  (eyebrowse-mode))
 #+END_SRC
 
 * Packages: IDO
@@ -384,15 +405,8 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
                                    (or width doom-modeline-bar-width)
                                    (or height doom-modeline-height))))
 
-  (doom-modeline-def-segment matches-without-buffer-size
-    (concat (doom-modeline--macro-recording)
-            (doom-modeline--anzu)
-            (doom-modeline--evil-substitute)
-            (doom-modeline--iedit)
-            (doom-modeline--symbol-overlay)
-            (doom-modeline--multiple-cursors)))
   (doom-modeline-def-modeline 'my-modeline
-    '(bar workspace-name window-number modals matches-without-buffer-size buffer-info remote-host selection-info)
+    '(bar workspace-name window-number modals matches buffer-info remote-host selection-info)
     '(buffer-position objed-state misc-info persp-name debug lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs checker bar))
   (add-hook 'doom-modeline-mode-hook (lambda () (doom-modeline-set-modeline 'my-modeline 'default))))
 
@@ -706,7 +720,9 @@ map
 (define-key my-map (kbd "j i") 'imenu)
 (define-key my-map (kbd "j l") 'ace-jump-line-mode)
 (define-key my-map (kbd "j w") 'ace-window)
-(define-key my-map (kbd "m") 'mc/mark-all-like-this)
+(define-key my-map (kbd "m d") 'mc/mark-all-dwim)
+(define-key my-map (kbd "m a") 'mc/mark-all-like-this)
+(define-key my-map (kbd "m n") 'mc/mark-next-like-this)
 (define-key my-map (kbd "o a") 'org-agenda)
 (define-key my-map (kbd "o c") 'org-capture)
 (define-key my-map (kbd "O") 'ido-occur)
