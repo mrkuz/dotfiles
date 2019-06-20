@@ -248,6 +248,12 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (use-package string-inflection
   :commands string-inflection-all-cycle)
 
+;; Move text like in org mode
+(use-package move-text
+  :defer 1
+  :config
+  (move-text-default-bindings))
+
 ;; Switch between frame configurations (like screen/tmux)
 (use-package eyebrowse
   :defer 1
@@ -262,6 +268,14 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
   ;; Create a scratch buffer for new workspaces
   (setq eyebrowse-new-workspace 'my-create-scratch)
   (eyebrowse-mode))
+
+;; Visit file as root
+(use-package sudo-edit
+  :commands sudo-edit)
+
+;; Browse kill ring via popup
+(use-package popup-kill-ring
+  :commands popup-kill-ring)
 #+END_SRC
 
 ** Undo tree
@@ -403,6 +417,10 @@ Keybindings:
 	 ([remap isearch-query-replace-regexp] . 'anzu-isearch-query-replace-regexp))
   :config
   (global-anzu-mode 1))
+
+;; Frontend to ag
+(use-package ag
+  :commands ag)
 #+END_SRC
 
 * Packages: Look and feel
@@ -632,6 +650,11 @@ Keybindings:
   :commands groovy-mode
   :mode (("\\.groovy\\'" . groovy-mode)
          ("\\.gradle\\'" . groovy-mode)))
+
+;; Colorize color codes in buffer
+(use-package rainbow-mode
+  :diminish rainbow-mode
+  :commands rainbow-mode)
 #+END_SRC
 
 ** Flycheck
@@ -795,6 +818,7 @@ Interact with language servers.
 (define-key my-map (kbd "j i") 'imenu)
 (define-key my-map (kbd "j l") 'ace-jump-line-mode)
 (define-key my-map (kbd "j w") 'ace-window)
+(define-key my-map (kbd "l") 'emacs-lock-mode)
 (define-key my-map (kbd "m d") 'mc/mark-all-dwim)
 (define-key my-map (kbd "m a") 'mc/mark-all-like-this)
 (define-key my-map (kbd "m n") 'mc/mark-next-like-this)
@@ -810,12 +834,14 @@ Interact with language servers.
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
 (define-key my-map (kbd "t o") 'treemacs-select-window)
 (define-key my-map (kbd "u") 'undo-tree-visualize)
+(define-key my-map (kbd "v c") 'rainbow-mode)
 (define-key my-map (kbd "v f") 'fci-mode)
 (define-key my-map (kbd "v i") 'indent-guide-mode)
 (define-key my-map (kbd "v l") 'my-toggle-truncate-line)
 (define-key my-map (kbd "v u") 'goto-address-mode)
 (define-key my-map (kbd "v w") 'whitespace-mode)
 (define-key my-map (kbd "x") 'er/expand-region)
+(define-key my-map (kbd "y") 'popup-kill-ring)
 (define-key my-map (kbd "DEL") 'hungry-delete-backward)
 (define-key my-map (kbd "SPC") 'company-complete)
 (define-key my-map (kbd "TAB") 'fold-dwim-toggle)
