@@ -69,7 +69,7 @@ shopt -s nocaseglob
 # Ignore case when matching patterns
 shopt -s nocasematch
 
-EMACS="XLIB_SKIP_ARGB_VISUALS=1 flatpak run org.gnu.emacs"
+EMACS="XLIB_SKIP_ARGB_VISUALS=1 emacs"
 
 alias emacs="$EMACS"
 alias p="pushd ."
