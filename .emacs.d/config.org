@@ -84,6 +84,8 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (electric-pair-mode 1)
 ;; Set fill column
 (setq-default fill-column 100)
+;; Use bash as default shell
+(setq explicit-shell-file-name "/bin/bash")
 #+END_SRC
 
 ** Indention
@@ -129,6 +131,8 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 ** Miscellaneous
 
 #+BEGIN_SRC emacs-lisp
+;; Set font
+(set-frame-font "DejaVu Sans Mono-11")
 ;; Disable toolbar
 (tool-bar-mode 0)
 ;; Disable blinking cursor
@@ -186,6 +190,8 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq org-agenda-files '("."))
 ;; Enable auto-fill-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
+;; Custom templates
+(add-to-list 'org-structure-template-alist '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
 #+END_SRC
 
 * Packages: Built-in
@@ -445,7 +451,7 @@ Keybindings:
   ;; Set width of modeline bar
   (setq doom-modeline-bar-width 1)
   ;; Set modeline height
-  (setq doom-modeline-height 22)
+  (setq doom-modeline-height 24)
   ;; Don't use icons
   (setq doom-modeline-icon nil)
   ;; Show minor modes
