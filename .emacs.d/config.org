@@ -83,8 +83,6 @@
 (setq mouse-drag-and-drop-region t)
 ;; Automatically close parens
 (electric-pair-mode 1)
-;; Enable find-file-at-point
-(ffap-bindings)
 ;; Set fill column
 (setq-default fill-column 100)
 #+END_SRC
@@ -262,7 +260,8 @@
   ;; Enable flex matching
   (setq ido-enable-flex-matching t)
   ;; Disable default faces (we use flx-ido)
-  (setq ido-use-faces nil))
+  (setq ido-use-faces nil)
+  (setq ido-use-filename-at-point 'guess))
 
 (use-package ido-vertical-mode
   :after ido
