@@ -147,6 +147,9 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq-default left-fringe-width 16)
 ;; Increase right fringe width
 (setq-default right-fringe-width 16)
+;; Show line numbers in front of each row
+(global-display-line-numbers-mode 1)
+
 #+END_SRC
 
 ** Highlightning
@@ -507,6 +510,7 @@ Keybindings:
 ;; Show dashboard on start
 (use-package dashboard
   :config
+  ;; Configure dashobard items
   (setq dashboard-items '((recents . 5) (bookmarks . 5) (projects . 5)))
   (dashboard-setup-startup-hook))
 #+END_SRC
@@ -514,6 +518,7 @@ Keybindings:
 * Packages: Projects
 
 #+BEGIN_SRC emacs-lisp
+;; Group files into projects
 (use-package projectile
   :defer 1
   :diminish projectile-mode
@@ -523,6 +528,7 @@ Keybindings:
   ;; Ignore buffers starting with *
   (setq projectile-globally-ignored-buffers '("\\*.*")))
 
+;; Add projectile support to treemacs
 (use-package treemacs-projectile
   :after treemacs projectile)
 #+END_SRC
@@ -530,6 +536,7 @@ Keybindings:
 * Packages: Auto-completion
 
 #+BEGIN_SRC emacs-lisp
+;; Provides auto-completion
 (use-package company
   :defer 1
   :diminish company-mode
@@ -541,36 +548,43 @@ Keybindings:
   (global-company-mode 1)
   ;; Provide completion after 1 character
   (setq company-minimum-prefix-length 1)
-  ;; ...and a short delay
+  ;; Show completion after short delay
   (setq company-idle-delay 0.2)
   ;; Show numbers to select completion
   (setq company-show-numbers t))
 
+;; Fuzzy matching for company
 (use-package company-flx
   :after company)
 
+;; Show quick help next to completion
 (use-package company-quickhelp
   :after company
   :hook (company-mode . company-quickhelp-mode)
   :config
+  ;; Configure delay util help is shown
   (setq company-quickhelp-delay 1.2)
+  ;; Limit nubmer of lines
   (setq company-quickhelp-max-lines 20)
+  ;; Allow colors and fonts
   (setq company-quickhelp-use-propertized-text t))
 #+END_SRC
 
 * Packages: Snippets
 
 #+BEGIN_SRC emacs-lisp
+;; Code and text snippets
 (use-package yasnippet
   :defer 1
   :diminish yas-minor-mode
   :config
   ;; Inhibit messages at startup
   (setq yas-verbosity 1)
-  ;; Only expand if next character is whitespace
+  ;; Prevent expansion in the middle of a text
   (setq-default yas-buffer-local-condition '(looking-at "[[:space:]\n]"))
   (yas-global-mode 1))
 
+;; Snippet collection
 (use-package yasnippet-snippets
   :after yasnippet)
 
@@ -582,18 +596,16 @@ Keybindings:
 * Packages: Git
 
 #+BEGIN_SRC emacs-lisp
-;; Show changes in fringe
-(use-package git-gutter-fringe
-  :defer t)
 
+;; Show changes in fringe
 (use-package git-gutter
   :diminish git-gutter-mode
   :config
+  (use-package git-gutter-fringe)
   (require 'git-gutter-fringe)
-  (global-git-gutter-mode +1)
-  ;; Show line numbers in front of each row (has to be called after activation git-gutter mode)
-  (global-display-line-numbers-mode 1))
+  (global-git-gutter-mode +1))
 
+;; Git fronted
 (use-package magit
   :commands magit-status)
 
@@ -601,12 +613,37 @@ Keybindings:
 
 * Packages: Development
 
+** Miscellaneous
+
 #+BEGIN_SRC emacs-lisp
+;; Improved code-folding
+(use-package fold-dwim
+  :commands fold-dwim-toggle)
+
+;; PlantUML integration
+(use-package plantuml-mode
+  :commands plantuml-mode
+  :config
+  (setq plantuml-jar-path "~/opt/plantuml/plantuml.jar")
+  (setq org-plantuml-jar-path plantuml-jar-path))
+
+;; Groovy programming
+(use-package groovy-mode
+  :commands groovy-mode
+  :mode (("\\.groovy\\'" . groovy-mode)
+         ("\\.gradle\\'" . groovy-mode)))
+#+END_SRC
+
+** Flycheck
+
+#+BEGIN_SRC emacs-lisp
+;; On-the-fly syntax checking
 (use-package flycheck
   :defer 1
   :diminish flycheck-mode
   :hook (prog-mode . flycheck-mode)
   :config
+  ;; Check on save and when mode gets enabled
   (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
 ;; Show flycheck errors as tooltip
@@ -614,57 +651,49 @@ Keybindings:
   :after flycheck
   :config
   (flycheck-pos-tip-mode))
+#+END_SRC
 
-;; Execute test methods
-(use-package maven-test-mode
-  :diminish maven-test-mode
-  :hook (java-mode . maven-test-mode))
+** REST client
 
-;; Toggle code-folding
-(use-package fold-dwim
-  :commands fold-dwim-toggle)
-
+#+BEGIN_SRC emacs-lisp
 ;; REST client
 (use-package restclient
   :mode ("\\.rest\\'" . restclient-mode)
   :commands restclient-mode)
 
+;; Org mode integration
 (use-package ob-restclient
   :after restclient)
 
+;; Company support
 (use-package company-restclient
   :after restclient company
   :config
   (add-to-list 'company-backends 'company-restclient))
-
-(use-package plantuml-mode
-  :commands plantuml-mode
-  :config
-  (setq plantuml-jar-path "~/opt/plantuml/plantuml.jar")
-  (setq org-plantuml-jar-path plantuml-jar-path))
-
-(use-package groovy-mode
-  :commands groovy-mode
-  :mode (("\\.groovy\\'" . groovy-mode)
-         ("\\.gradle\\'" . groovy-mode)))
-
 #+END_SRC
 
-* Packages: Database
+* Packages: Databases
+
+** MongoDB
 
 #+BEGIN_SRC emacs-lisp
+;; MongoDB shell
 (use-package inf-mongo
   :commands inf-mongo
   :config
   (setq inf-mongo-command "mongo mongodb://127.0.1:27017"))
 
+;; Org mode integration
 (use-package ob-mongo
   :defer t)
 #+END_SRC
 
 * Packages: LSP
 
+Interact with language servers.
+
 #+BEGIN_SRC emacs-lisp
+;; LSP mode
 (use-package lsp-mode
   :commands lsp
   :bind (:map lsp-mode-map
@@ -673,30 +702,41 @@ Keybindings:
               ("C-c l o" . 'lsp-organize-imports)
               ("C-c l x" .  'lsp-execute-code-action))
   :config
+  ;; Disable auto execution of single actions
   (setq lsp-auto-execute-action nil)
+  ;; Disable auto configuration
   (setq lsp-auto-configure nil)
+  ;; Disable eldoc
   (setq lsp-eldoc-enable-signature-help nil)
+  ;; Set up flycheck
   (require 'lsp-ui-flycheck)
   (lsp-ui-flycheck-enable t))
 
+;; Company support
 (use-package company-lsp
   :after lsp-mode company
   :config
-  (add-to-list 'company-backends 'company-lsp)
-  (setq company-lsp-cache-candidates 'auto))
+  ;; Register LSP backend
+  (add-to-list 'company-backends 'company-lsp))
 
+;; LSP UI extensions
 (use-package lsp-ui
   :after lsp-mode)
 
+;; LSP support for java
 (use-package lsp-java
   :after lsp-mode
   :config
+  ;; Disable automatic build
   (setq lsp-java-auto-build nil)
-  (setq lsp-java-progress-report nil)
+  ;; Set server installation directory
   (setq lsp-java-server-install-dir (no-littering-expand-var-file-name "eclipse.jdt.ls/server"))
+  ;; Set workspace directory
   (setq lsp-java-workspace-dir (no-littering-expand-var-file-name "workspace"))
+  ;; Set cache directory
   (setq lsp-java-workspace-cache-dir (no-littering-expand-var-file-name "workspace/cache")))
 
+;; Debugging
 (use-package dap-mode
   :after lsp-mode
   :hook ((lsp-mode . (lambda () (dap-mode) (dap-ui-mode))))
@@ -715,11 +755,11 @@ Keybindings:
               ("C-c d R" . 'dap-repl)
               ("C-c d t" . 'dap-switch-thread))
   :config
+  ;; Java support
   (require 'dap-java))
 #+END_SRC
 
-* My key
-map
+* Global keybinding
 
 #+BEGIN_SRC emacs-lisp
 (setq my-map (make-sparse-keymap))
@@ -765,6 +805,7 @@ map
 (define-key my-map (kbd "s c") 'aya-create)
 (define-key my-map (kbd "s e") 'aya-expand)
 (define-key my-map (kbd "s i") 'company-yasnippet)
+(define-key my-map (kbd "s t") 'yas-describe-tables)
 (define-key my-map (kbd "t t") 'treemacs)
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
 (define-key my-map (kbd "t o") 'treemacs-select-window)
