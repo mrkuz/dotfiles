@@ -232,7 +232,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
   :hook (prog-mode . hs-minor-mode))
 #+END_SRC
 
-* Packages: Usability
+* Packages: Utilities
 
 ** Miscellaneous
 
@@ -292,6 +292,10 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 ;; Browse kill ring via popup
 (use-package popup-kill-ring
   :commands popup-kill-ring)
+
+;; Google translate
+(use-package google-translate
+  :commands google-translate-buffer)
 #+END_SRC
 
 ** Undo tree
@@ -416,6 +420,10 @@ Keybindings:
 ;; Visit a link by using a single character
 (use-package ace-link
   :commands ace-link)
+
+;; Jump to definition at point
+(use-package dump-jump
+  :commands dump-jump-go)
 #+END_SRC
 
 * Packages: Search
@@ -870,6 +878,8 @@ Interact with language servers.
 (define-key my-map (kbd "v w") 'whitespace-mode)
 (define-key my-map (kbd "x") 'er/expand-region)
 (define-key my-map (kbd "y") 'popup-kill-ring)
+(define-key my-map (kbd ".") 'dumb-jump-go)
+(define-key my-map (kbd ",") 'dumb-jump-back)
 (define-key my-map (kbd "DEL") 'hungry-delete-backward)
 (define-key my-map (kbd "SPC") 'company-complete)
 (define-key my-map (kbd "TAB") 'fold-dwim-toggle)
