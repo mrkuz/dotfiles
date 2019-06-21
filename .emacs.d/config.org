@@ -55,7 +55,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 #+BEGIN_SRC emacs-lisp :results none
 ;; Set up initial frame position and size
-(setq initial-frame-alist '((left . 450) (top . 150) (width . 100) (height . 50)))
+(setq initial-frame-alist '((width . 100) (height . 50)))
 ;; Increase GC threshold
 (setq gc-cons-threshold 80000000)
 ;; Disable backup files
@@ -132,7 +132,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 #+BEGIN_SRC emacs-lisp :results none
 ;; Set font
-(set-frame-font "DejaVu Sans Mono-11")
+(set-frame-font "DejaVu Sans Mono:size=14")
 ;; Disable toolbar
 (tool-bar-mode 0)
 ;; Disable blinking cursor
@@ -152,7 +152,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 ;; Increase right fringe width
 (setq-default right-fringe-width 16)
 ;; Show line numbers in front of each row
-(global-display-line-numbers-mode 1)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 #+END_SRC
 
@@ -451,7 +451,7 @@ Keybindings:
   ;; Set width of modeline bar
   (setq doom-modeline-bar-width 1)
   ;; Set modeline height
-  (setq doom-modeline-height 24)
+  (setq doom-modeline-height 20)
   ;; Don't use icons
   (setq doom-modeline-icon nil)
   ;; Show minor modes
@@ -505,7 +505,6 @@ Keybindings:
 ;; Tree layout explorer
 (use-package treemacs
   :commands treemacs
-  :hook (treemacs-mode . (lambda () (display-line-numbers-mode 0)))
   :hook (treemacs-mode . (lambda () (setq mode-line-format "")))
   :bind (:map treemacs-mode-map ([mouse-1] . 'treemacs-single-click-expand-action))
   :config
