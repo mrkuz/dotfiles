@@ -2,7 +2,7 @@
 
 Set up MELPA package repository.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
@@ -12,7 +12,7 @@ Set up MELPA package repository.
 
 Install use-package to simplify package configuration.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -28,7 +28,7 @@ Install use-package to simplify package configuration.
 
 Banchmarks the init process. View results with ~benchmark-init/show-durations-tree~.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (use-package benchmark-init
   :config
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
@@ -36,7 +36,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** Miscellaneous
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Get rid of minor modes in the modeline
 (use-package diminish)
 ;; Keep ~/.emacs.d clean by using 'etc' and 'var' subdirectories
@@ -53,7 +53,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** Miscellaneous
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Set up initial frame position and size
 (setq initial-frame-alist '((left . 450) (top . 150) (width . 100) (height . 50)))
 ;; Increase GC threshold
@@ -90,7 +90,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** Indention
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Tab width
 (setq-default tab-width 4)
 ;; Always use spaces
@@ -101,7 +101,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** Scrolling
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Scroll to top and bottom when hit end
 (setq-default scroll-error-top-bottom t)
 ;; Try to keep position when scrolling pages
@@ -112,7 +112,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** Calendar
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Start week with monday
 (setq calendar-week-start-day 1)
 ;; Use ISO date format
@@ -121,7 +121,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** File paths
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Customization file
 (setq custom-file (no-littering-expand-etc-file-name "custom"))
 #+END_SRC
@@ -130,7 +130,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** Miscellaneous
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Set font
 (set-frame-font "DejaVu Sans Mono-11")
 ;; Disable toolbar
@@ -158,14 +158,14 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** Highlightning
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Highlight current line
 (global-hl-line-mode 1)
 #+END_SRC
 
 ** Diminish
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (diminish 'eldoc-mode)
 (diminish 'abbrev-mode)
 (diminish 'org-indent-mode)
@@ -173,7 +173,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 * Org mode
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Start org-mode indented
 (setq org-startup-indented t)
 ;; Add CLOSED timestamp to DONE items
@@ -191,12 +191,12 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 ;; Enable auto-fill-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
 ;; Custom templates
-(add-to-list 'org-structure-template-alist '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+(add-to-list 'org-structure-template-alist '("el" "#+BEGIN_SRC emacs-lisp :results none\n?\n#+END_SRC"))
 #+END_SRC
 
 * Packages: Built-in
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 
 ;; Keep track of recently opened files
 (use-package recentf
@@ -226,7 +226,7 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 
 ** Miscellaneous
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Try packages without installation
 (use-package try
   :commands try)
@@ -293,7 +293,7 @@ Keybindings:
 - =T=: Displays timestamp
 - =D=: Show diff
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Store undo history in tree structure
 (use-package undo-tree
   :defer 1
@@ -310,7 +310,7 @@ Keybindings:
 
 ** Miscellaneous
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (use-package ido
   :defer 1
   :config
@@ -362,7 +362,7 @@ Keybindings:
 - =M-.=: Go to function definition
 - =C-h w=: Show key binding
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (use-package smex
   :after ido
   :commands smex
@@ -373,7 +373,7 @@ Keybindings:
 
 * Packages: Help
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Show available key bindings based on your current input
 (use-package which-key
   :defer 1
@@ -390,7 +390,7 @@ Keybindings:
 
 * Packages: Navigation
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 
 ;; Jump to a word/line by using a single character
 (use-package ace-jump-mode
@@ -410,7 +410,7 @@ Keybindings:
 
 * Packages: Search
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Show number of matches in modeline
 (use-package anzu
   :defer 1
@@ -431,7 +431,7 @@ Keybindings:
 
 * Packages: Look and feel
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 
 ;; Icon collection
 (use-package all-the-icons)
@@ -530,7 +530,7 @@ Keybindings:
 
 * Packages: Startup
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Show dashboard on start
 (use-package dashboard
   :config
@@ -541,7 +541,7 @@ Keybindings:
 
 * Packages: Projects
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Group files into projects
 (use-package projectile
   :defer 1
@@ -559,7 +559,7 @@ Keybindings:
 
 * Packages: Auto-completion
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Provides auto-completion
 (use-package company
   :defer 1
@@ -596,7 +596,7 @@ Keybindings:
 
 * Packages: Snippets
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Code and text snippets
 (use-package yasnippet
   :defer 1
@@ -619,7 +619,7 @@ Keybindings:
 
 * Packages: Git
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 
 ;; Show changes in fringe
 (use-package git-gutter
@@ -639,7 +639,7 @@ Keybindings:
 
 ** Miscellaneous
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; Improved code-folding
 (use-package fold-dwim
   :commands fold-dwim-toggle)
@@ -665,7 +665,7 @@ Keybindings:
 
 ** Flycheck
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; On-the-fly syntax checking
 (use-package flycheck
   :defer 1
@@ -684,7 +684,7 @@ Keybindings:
 
 ** REST client
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; REST client
 (use-package restclient
   :mode ("\\.rest\\'" . restclient-mode)
@@ -705,7 +705,7 @@ Keybindings:
 
 ** MongoDB
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; MongoDB shell
 (use-package inf-mongo
   :commands inf-mongo
@@ -721,7 +721,7 @@ Keybindings:
 
 Interact with language servers.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;; LSP mode
 (use-package lsp-mode
   :commands lsp
@@ -790,7 +790,7 @@ Interact with language servers.
 
 * Global keybinding
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (setq my-map (make-sparse-keymap))
 (global-set-key (kbd "C-;") my-map)
 (global-set-key (kbd "C-ö") my-map)
@@ -856,7 +856,7 @@ Interact with language servers.
 
 * Custom functions
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (defun my-highlight-changes-remove-all ()
   "Remove all highligts."
   (interactive)
@@ -878,7 +878,7 @@ Interact with language servers.
 
 * Fixes
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (require 'ansi-color)
 (defun my-colorize-compilation ()
   "Colorize compilation output."
