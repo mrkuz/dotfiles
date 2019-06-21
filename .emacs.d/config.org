@@ -422,8 +422,8 @@ Keybindings:
   :commands ace-link)
 
 ;; Jump to definition at point
-(use-package dump-jump
-  :commands dump-jump-go)
+(use-package dumb-jump
+  :commands dumb-jump-go)
 #+END_SRC
 
 * Packages: Search
