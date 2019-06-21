@@ -126,6 +126,15 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq custom-file (no-littering-expand-etc-file-name "custom"))
 #+END_SRC
 
+** Ediff
+
+#+BEGIN_SRC emacs-lisp :results none
+;; Use window instead of control frame
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; Compare side by side
+(setq ediff-split-window-function 'split-window-horizontally)
+#+END_SRC
+
 * Look and feel
 
 ** Miscellaneous
@@ -573,7 +582,7 @@ Keybindings:
   ;; Provide completion after 1 character
   (setq company-minimum-prefix-length 1)
   ;; Show completion after short delay
-  (setq company-idle-delay 0.2)
+  (setq company-idle-delay 0.4)
   ;; Show numbers to select completion
   (setq company-show-numbers t))
 
@@ -623,6 +632,7 @@ Keybindings:
 
 ;; Show changes in fringe
 (use-package git-gutter
+  :defer 1
   :diminish git-gutter-mode
   :config
   (setq git-gutter:modified-sign "│")
@@ -664,6 +674,15 @@ Keybindings:
 (use-package rainbow-mode
   :diminish rainbow-mode
   :commands rainbow-mode)
+
+;; Alternative diff method
+(use-package vdiff
+  :commands vdiff-buffers
+  :config
+  ;; Automatically refine hunks
+  (setq vdiff-auto-refine t)
+  ;; Set up keybindings
+  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
 #+END_SRC
 
 ** Flycheck
