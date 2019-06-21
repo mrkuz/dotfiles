@@ -147,10 +147,10 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq use-dialog-box nil)
 ;; Disable GTK tooltips
 (setq x-gtk-use-system-tooltips nil)
-;; Increase left fringe width
-(setq-default left-fringe-width 16)
-;; Increase right fringe width
-(setq-default right-fringe-width 16)
+;; Set left fringe width
+(setq-default left-fringe-width 12)
+;; Set right fringe width
+(setq-default right-fringe-width 12)
 ;; Show line numbers in front of each row
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
@@ -168,7 +168,6 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 #+BEGIN_SRC emacs-lisp :results none
 (diminish 'eldoc-mode)
 (diminish 'abbrev-mode)
-(diminish 'org-indent-mode)
 #+END_SRC
 
 * Org mode
@@ -190,6 +189,8 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq org-agenda-files '("."))
 ;; Enable auto-fill-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
+;; Diminish
+(add-hook 'org-mode-hook (lambda () (diminish 'org-indent-mode)))
 ;; Custom templates
 (add-to-list 'org-structure-template-alist '("el" "#+BEGIN_SRC emacs-lisp :results none\n?\n#+END_SRC"))
 #+END_SRC
@@ -624,13 +625,16 @@ Keybindings:
 (use-package git-gutter
   :diminish git-gutter-mode
   :config
-  (use-package git-gutter-fringe)
-  (require 'git-gutter-fringe)
+  (setq git-gutter:modified-sign "│")
+  (setq git-gutter:deleted-sign "│")
+  (setq git-gutter:added-sign "│")
   (global-git-gutter-mode +1))
 
 ;; Git fronted
 (use-package magit
-  :commands magit-status)
+  :commands magit-status
+  :hook (after-save . magit-after-save-refresh-status)
+  :config)
 
 #+END_SRC
 
