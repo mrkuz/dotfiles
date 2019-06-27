@@ -86,6 +86,10 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq-default fill-column 100)
 ;; Use bash as default shell
 (setq explicit-shell-file-name "/bin/bash")
+;; Ask before exiting emacs
+(setq confirm-kill-emacs 'yes-or-no-p)
+;; Store and switch through window configurations
+(winner-mode 1)
 #+END_SRC
 
 ** Indention
@@ -202,6 +206,12 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (add-hook 'org-mode-hook (lambda () (diminish 'org-indent-mode)))
 ;; Custom templates
 (add-to-list 'org-structure-template-alist '("el" "#+BEGIN_SRC emacs-lisp :results none\n?\n#+END_SRC"))
+;; Custom capture templates
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+function "todo.org" org-reverse-datetree-goto-read-date-in-file)
+      "* TODO %?\nSCHEDULED: <%(org-read-date nil nil org-read-date-final-answer)>\n\n%i")))
+;; Allow setting refile targets as local file variable
+(put 'org-refile-targets 'safe-local-variable (lambda (_) t))
 #+END_SRC
 
 * Packages: Built-in
@@ -818,6 +828,19 @@ Interact with language servers.
   (require 'dap-java))
 #+END_SRC
 
+* Packages: Org
+
+#+BEGIN_SRC emacs-lisp :results none
+;; Provides reverse date trees
+(use-package org-reverse-datetree
+  :defer 1
+  :config
+  ;; Customize defaut date tree format
+  (setq org-reverse-datetree-date-format "%Y-%m-%d %A")
+  (setq org-reverse-datetree-week-format "%Y-%m KW%W")
+  (setq org-reverse-datetree-year-format "%Y"))
+#+END_SRC
+
 * Global keybinding
 
 #+BEGIN_SRC emacs-lisp :results none
@@ -860,6 +883,7 @@ Interact with language servers.
 (define-key my-map (kbd "m n") 'mc/mark-next-like-this)
 (define-key my-map (kbd "o a") 'org-agenda)
 (define-key my-map (kbd "o c") 'org-capture)
+(define-key my-map (kbd "o l") 'org-store-link)
 (define-key my-map (kbd "O") 'ido-occur)
 (define-key my-map (kbd "R") (lambda () (interactive ) (org-babel-load-file "~/.emacs.d/config.org")))
 (define-key my-map (kbd "s c") 'aya-create)
@@ -906,6 +930,17 @@ Interact with language servers.
     (switch-to-buffer scratch)
     (funcall initial-major-mode)
     scratch))
+
+(defun my-prepare-diff ()
+  "Prepare two buffers for diff."
+  (interactive)
+  (let ((a (generate-new-buffer "*A*"))
+        (b (generate-new-buffer "*B*")))
+    (delete-other-windows)
+    (switch-to-buffer a)
+    (split-window-horizontally)
+    (switch-to-buffer-other-window b)
+    (other-window 1)))
 #+END_SRC
 
 * Fixes
