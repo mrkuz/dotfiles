@@ -953,3 +953,9 @@ Interact with language servers.
 
 (add-hook 'compilation-filter-hook 'my-colorize-compilation)
 #+END_SRC
+* Start server
+
+#+BEGIN_SRC emacs-lisp :results none
+(require 'server)
+(unless (server-running-p) (server-start))
+#+END_SRC
