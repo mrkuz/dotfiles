@@ -72,7 +72,7 @@ shopt -s nocasematch
 EMACS="XLIB_SKIP_ARGB_VISUALS=1 emacs"
 
 alias emacs="$EMACS"
-alias ec="emacsclient -c"
+alias ec="XLIB_SKIP_ARGB_VISUALS=1 emacsclient -n -a emacs -c"
 alias p="pushd ."
 alias pp="popd"
 
