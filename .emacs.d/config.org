@@ -330,69 +330,36 @@ Keybindings:
   (global-undo-tree-mode))
 #+END_SRC
 
-* Packages: IDO
-
-** Miscellaneous
+* Packages: Ivy
 
 #+BEGIN_SRC emacs-lisp :results none
-(use-package ido
+(use-package ivy
   :defer 1
   :config
-  (ido-mode 1)
-  ;; Use ido for all buffer/file operations
-  (ido-everywhere 1)
+  ;; Show recent M-x commands first
+  (use-package smex)
   ;; Enable fuzzy matching
-  (setq ido-enable-flex-matching t)
-  ;; Disable default faces (we use flx-ido)
-  (setq ido-use-faces nil)
-  ;; Use file at point for finding files
-  (setq ido-use-filename-at-point 'guess))
+  (use-package flx)
+  ;; Use fuzzy matching everywhere, except for swiper
+  (setq ivy-re-builders-alist
+        '((swiper . ivy--regex-plus)
+          (t . ivy--regex-fuzzy)))
+  ;; Add recent files and bookmarks to buffer list
+  (setq ivy-use-virtual-buffers t)
+  ;; Start with empty line (remove ^)
+  (setq ivy-initial-inputs-alist nil)
+  (setq magit-completing-read-function 'ivy-completing-read)
+  (setq projectile-completion-system 'ivy)
+  (ivy-mode 1))
 
-;; Show completions vertically
-(use-package ido-vertical-mode
-  :after ido
-  :init
-  ;; Customize indicator
-  (setq ido-vertical-indicator " >")
+(use-package ivy-hydra
+  :after ivy)
+
+(use-package counsel
+  :after ivy
   :config
-  (ido-vertical-mode)
-  ;; Enable C-n/C-p key bindings
-  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+  (counsel-mode 1))
 
-;; Use ido everywhere
-(use-package ido-completing-read+
-  :after ido
-  :config
-  (ido-ubiquitous-mode 1))
-
-;; Improved fuzzy matching
-(use-package flx-ido
-  :after ido
-  :config
-  (flx-ido-mode 1))
-
-;; Interactively show occurences
-(use-package ido-occur
-  :commands ido-occur)
-#+END_SRC
-
-** Smex
-
-Replacement for M-x. Remembers recently used commands.
-
-Keybindings:
-
-- =C-h f=: Describe function
-- =M-.=: Go to function definition
-- =C-h w=: Show key binding
-
-#+BEGIN_SRC emacs-lisp :results none
-(use-package smex
-  :after ido
-  :commands smex
-  :bind (
-         ( "M-x" . 'smex)
-         ( "M-X" . 'smex-major-mode-commands)))
 #+END_SRC
 
 * Packages: Help
@@ -884,12 +851,12 @@ Interact with language servers.
 (define-key my-map (kbd "o a") 'org-agenda)
 (define-key my-map (kbd "o c") 'org-capture)
 (define-key my-map (kbd "o l") 'org-store-link)
-(define-key my-map (kbd "O") 'ido-occur)
 (define-key my-map (kbd "R") (lambda () (interactive ) (org-babel-load-file "~/.emacs.d/config.org")))
 (define-key my-map (kbd "s c") 'aya-create)
 (define-key my-map (kbd "s e") 'aya-expand)
 (define-key my-map (kbd "s i") 'company-yasnippet)
 (define-key my-map (kbd "s t") 'yas-describe-tables)
+(define-key my-map (kbd "S") 'swiper)
 (define-key my-map (kbd "t t") 'treemacs)
 (define-key my-map (kbd "t p") 'treemacs-add-and-display-current-project)
 (define-key my-map (kbd "t o") 'treemacs-select-window)
