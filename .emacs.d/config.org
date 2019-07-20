@@ -200,6 +200,8 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 ;; Add all files in the org directory to the agenda
 (setq org-agenda-files '("."))
+;; Set archive file
+(setq org-archive-location "~/org/archive.org::* File: %s")
 ;; Enable auto-fill-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
 ;; Diminish
@@ -306,6 +308,10 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 ;; Google translate
 (use-package google-translate
   :commands google-translate-buffer)
+
+;; Improved folding
+(use-package fold-dwim
+  :commands fold-dwim-toggle)
 #+END_SRC
 
 ** Undo tree
@@ -328,6 +334,20 @@ Keybindings:
   ;; Hide timestamps per default
   (setq undo-tree-visualizer-relative-timestamps nil)
   (global-undo-tree-mode))
+#+END_SRC
+
+** Diff
+
+#+BEGIN_SRC emacs-lisp :results none
+
+;; Alternative diff method
+(use-package vdiff
+  :commands vdiff-buffers
+  :config
+  ;; Automatically refine hunks
+  (setq vdiff-auto-refine t)
+  ;; Set up keybindings
+  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
 #+END_SRC
 
 * Packages: Ivy
@@ -635,41 +655,6 @@ Keybindings:
 
 * Packages: Development
 
-** Miscellaneous
-
-#+BEGIN_SRC emacs-lisp :results none
-;; Improved code-folding
-(use-package fold-dwim
-  :commands fold-dwim-toggle)
-
-;; PlantUML integration
-(use-package plantuml-mode
-  :commands plantuml-mode
-  :config
-  (setq plantuml-jar-path "~/opt/plantuml/plantuml.jar")
-  (setq org-plantuml-jar-path plantuml-jar-path))
-
-;; Groovy programming
-(use-package groovy-mode
-  :commands groovy-mode
-  :mode (("\\.groovy\\'" . groovy-mode)
-         ("\\.gradle\\'" . groovy-mode)))
-
-;; Colorize color codes in buffer
-(use-package rainbow-mode
-  :diminish rainbow-mode
-  :commands rainbow-mode)
-
-;; Alternative diff method
-(use-package vdiff
-  :commands vdiff-buffers
-  :config
-  ;; Automatically refine hunks
-  (setq vdiff-auto-refine t)
-  ;; Set up keybindings
-  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
-#+END_SRC
-
 ** Flycheck
 
 #+BEGIN_SRC emacs-lisp :results none
@@ -724,7 +709,7 @@ Keybindings:
   :defer t)
 #+END_SRC
 
-* Packages: LSP
+* Packages: LSP/DAP
 
 Interact with language servers.
 
@@ -804,8 +789,53 @@ Interact with language servers.
   :config
   ;; Customize defaut date tree format
   (setq org-reverse-datetree-date-format "%Y-%m-%d %A")
-  (setq org-reverse-datetree-week-format "%Y-%m KW%W")
+  (setq org-reverse-datetree-week-format "%Y-%m KW%V")
   (setq org-reverse-datetree-year-format "%Y"))
+#+END_SRC
+
+* Packages: Miscellaneous modes
+
+#+BEGIN_SRC emacs-lisp :results none
+
+;; PlantUML integration
+(use-package plantuml-mode
+  :commands plantuml-mode
+  :config
+  (setq plantuml-jar-path "~/opt/plantuml/plantuml.jar")
+  (setq org-plantuml-jar-path plantuml-jar-path))
+
+;; Groovy programming
+(use-package groovy-mode
+  :commands groovy-mode
+  :mode (("\\.groovy\\'" . groovy-mode)
+         ("\\.gradle\\'" . groovy-mode)))
+
+;; Colorize color codes in buffer
+(use-package rainbow-mode
+  :diminish rainbow-mode
+  :commands rainbow-mode)
+
+;; Protobuf
+(use-package protobuf-mode
+  :commands protobuf-mode
+  :mode (("\\.proto\\'" . protobuf-mode)))
+
+;; Yaml
+(use-package yaml-mode
+  :commands yaml-mode
+  :mode (("\\.yaml\\'" . yaml-mode)
+         ("\\.yml\\'" . yaml-mode)))
+
+;; Dockerfile
+(use-package dockerfile-mode
+  :commands dockerfile-mode
+  :mode (("Dockerfile\\'" . dockerfile-mode)))
+
+;; Docker compose files
+(use-package docker-compose-mode
+  :commands docker-compose-mode
+  :mode (("docker-compose.yaml\\'" . docker-compose-mode)
+         ("docker-compose.yml\\'" . docker-compose-mode)))
 #+END_SRC
 
 * Global keybinding
