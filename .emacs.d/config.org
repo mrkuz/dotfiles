@@ -959,3 +959,14 @@ Interact with language servers.
 (require 'server)
 (unless (server-running-p) (server-start))
 #+END_SRC
+* Personal information / Email
+
+#+BEGIN_SRC emacs-lisp :results none
+(setq user-full-name "Markus")
+(setq user-mail-address "markus@bitsandbobs.net")
+(setq smtpmail-smtp-user user-mail-address)
+(setq send-mail-function 'smtpmail-send-it)
+(setq smtpmail-smtp-server "smtp.gmail.com")
+(setq smtpmail-stream-type 'ssl)
+(setq smtpmail-smtp-service 465)
+#+END_SRC
