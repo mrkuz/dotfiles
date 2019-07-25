@@ -90,6 +90,8 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq confirm-kill-emacs 'yes-or-no-p)
 ;; Store and switch through window configurations
 (winner-mode 1)
+;; Always follow links
+(setq vc-follow-symlinks t)
 #+END_SRC
 
 ** Indention
