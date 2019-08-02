@@ -698,6 +698,21 @@ Keybindings:
   (add-to-list 'company-backends 'company-restclient))
 #+END_SRC
 
+* Packages: Markdown
+
+#+BEGIN_SRC emacs-lisp :results none
+(use-package markdown-mode
+  :mode ("\\.md\\'" . gfm-mode)
+  :commands (markdown-mode gfm-mode)
+  :config
+  (setq markdown-command "pandoc -s -t html5"))
+
+(use-package markdown-preview-mode
+  :commands markdown-preview-mode
+  :config
+  (setq markdown-preview-stylesheets '("https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css")))
+#+END_SRC
+
 * Packages: Databases
 
 ** MongoDB
