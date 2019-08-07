@@ -167,8 +167,10 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 ;; Set right fringe width
 (setq-default right-fringe-width 12)
 ;; Show line numbers in front of each row
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
-
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (display-line-numbers-mode)
+            (set-face-attribute 'line-number-current-line nil :inherit 'default :foreground "#bbc2cf")))
 #+END_SRC
 
 ** Highlightning
@@ -314,6 +316,10 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 ;; Improved folding
 (use-package fold-dwim
   :commands fold-dwim-toggle)
+
+;; Simultaneous navigation and editing
+(use-package broadcast
+  :commands broadcast-mode)
 #+END_SRC
 
 ** Undo tree
@@ -350,6 +356,18 @@ Keybindings:
   (setq vdiff-auto-refine t)
   ;; Set up keybindings
   (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
+#+END_SRC
+
+** Terminal
+
+#+BEGIN_SRC emacs-lisp :results none
+(use-package multi-term
+  :commands multi-term
+  :bind ("C-c t" . 'multi-term)
+  :hook (term-mode . (lambda () (setq-local global-hl-line-mode nil)))
+  :config
+  (add-to-list 'term-bind-key-alist '("C-c C-j" . term-line-mode))
+  (add-to-list 'term-bind-key-alist '("C-c C-k" . term-char-mode)))
 #+END_SRC
 
 * Packages: Ivy
@@ -654,7 +672,7 @@ Keybindings:
 (use-package magit
   :commands magit-status
   :hook (after-save . magit-after-save-refresh-status)
-  :config)
+  :bind ("C-c g" . 'magit-status))
 
 #+END_SRC
 
@@ -871,6 +889,7 @@ Interact with language servers.
 (define-key my-map (kbd "M-u") 'string-inflection-underscore)
 (define-key my-map (kbd "M-U") 'string-inflection-upcase)
 (define-key my-map (kbd "M-x") 'string-inflection-all-cycle)
+(define-key my-map (kbd "b") 'broadcast-mode)
 (define-key my-map (kbd "d d") 'dap-debug)
 (define-key my-map (kbd "d l") 'lsp)
 (define-key my-map (kbd "D l") 'desktop-read)
@@ -884,7 +903,6 @@ Interact with language servers.
 (define-key my-map (kbd "g n") 'git-gutter:next-hunk)
 (define-key my-map (kbd "g p") 'git-gutter:previous-hunk)
 (define-key my-map (kbd "g r") 'git-gutter:revert-hunk)
-(define-key my-map (kbd "g s") 'magit-status)
 (define-key my-map (kbd "g t") 'git-gutter:toggle)
 (define-key my-map (kbd "G") 'google-this)
 (define-key my-map (kbd "h h") 'highlight-changes-mode)
@@ -894,7 +912,7 @@ Interact with language servers.
 (define-key my-map (kbd "j i") 'imenu)
 (define-key my-map (kbd "j l") 'ace-jump-line-mode)
 (define-key my-map (kbd "j w") 'ace-window)
-(define-key my-map (kbd "l") 'emacs-lock-mode)
+(define-key my-map (kbd "L") 'emacs-lock-mode)
 (define-key my-map (kbd "m d") 'mc/mark-all-dwim)
 (define-key my-map (kbd "m a") 'mc/mark-all-like-this)
 (define-key my-map (kbd "m n") 'mc/mark-next-like-this)
