@@ -82,6 +82,8 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (setq mouse-drag-and-drop-region t)
 ;; Automatically close parens
 (electric-pair-mode 1)
+;; Don't insert matching pair before non-whitespace characters
+(setq-default electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
 ;; Set fill column
 (setq-default fill-column 100)
 ;; Use bash as default shell
@@ -246,6 +248,12 @@ Banchmarks the init process. View results with ~benchmark-init/show-durations-tr
 (use-package hideshow
   :diminish hs-minor-mode
   :hook (prog-mode . hs-minor-mode))
+
+;; Reuse dired buffer
+(use-package dired
+  :ensure nil
+  :bind (:map dired-mode-map ([remap dired-find-file] . 'dired-find-alternate-file)))
+
 #+END_SRC
 
 * Packages: Utilities
