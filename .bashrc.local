@@ -75,6 +75,7 @@ alias emacs="$EMACS"
 alias ec="XLIB_SKIP_ARGB_VISUALS=1 emacsclient -n -a emacs -c"
 alias p="pushd ."
 alias pp="popd"
+alias x11d="x11docker --gpu --clipboard --pulseaudio --printer -m -q -h"
 
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
