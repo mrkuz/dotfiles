@@ -1,0 +1,151 @@
+[
+    {
+        "name" : "Desktop",
+        "shortcuts" : [
+            {
+                "key" : "Super + Space",
+                "description" : "Show application launcher"
+            },
+            {
+                "key" : "Super + A",
+                "description" : "Show all applications"
+            },
+            {
+                "key" : "Super + D",
+                "description" : "Hide all windows"
+            },
+            {
+                "key" : "Super + L",
+                "description" : "Lock screen"
+            },
+            {
+                "key" : "Super + N",
+                "description" : "Show notifications"
+            },
+            {
+                "key" : "Super + S",
+                "description" : "Show shortcuts overview"
+            },
+            {
+                "key" : "Super + W",
+                "description" : "Show window switcher"
+            },
+            {
+                "key" : "L Shift + R Shift",
+                "description" : "Switch input language"
+            }
+        ]
+    },
+        {
+        "name" : "Applications",
+        "shortcuts" : [
+            {
+                "key" : "Super + T",
+                "description" : "Launch terminal"
+            }
+        ]
+    },
+    {
+        "name" : "Screenshots",
+        "shortcuts" : [
+            {
+                "key" : "Print",
+                "description" : "Take screenshot"
+            },
+            {
+                "key" : "Shift + Print",
+                "description" : "Take screenshot of an area"
+            },
+            {
+                "key" : "Alt + Print",
+                "description" : "Take screenshot of a window"
+            }
+        ]
+    },
+    {
+        "name" : "Navigation",
+        "shortcuts" : [
+            {
+                "key" : "Super + 1",
+                "description" : "Switch to workspace 1"
+            },
+            {
+                "key" : "Super + Shift + 1",
+                "description" : "Move window to workspace 1"
+            },
+            {
+                "key" : "Super + Up",
+                "description" : "Switch to workspace above"
+            },
+            {
+                "key" : "Super + Down",
+                "description" : "Switch to workspace below"
+            },
+            {
+                "key" : "Super + Shift + Up",
+                "description" : "Move window one workspace up"
+            },
+            {
+                "key" : "Super + Shift + Down",
+                "description" : "Move window one workspace down"
+            },
+            {
+                "key" : "Super + Shift + Left",
+                "description" : "Move window one monitor to the left"
+            },
+            {
+                "key" : "Super + Shift + Right",
+                "description" : "Move window one monitor to the right"
+            },
+            {
+                "key" : "Alt + Tab",
+                "description" : "Switch windows"
+            },
+            {
+                "key" : "Alt + Escape",
+                "description" : "Switch windows directly"
+            }
+        ]
+    },
+    {
+        "name" : "Windows",
+        "shortcuts" : [
+            {
+                "key" : "Alt + Space",
+                "description" : "Activate menu"
+            },
+            {
+                "key" : "Alt + F4",
+                "description" : "Close Window"
+            },
+            {
+                "key" : "Alt + F5",
+                "description" : "Restore window"
+            },
+            {
+                "key" : "Alt + F7",
+                "description" : "Move window"
+            },
+            {
+                "key" : "Alt + F8",
+                "description" : "Resize window"
+            },
+            {
+                "key" : "Super + Ctrl + Up",
+                "description" : "Maximize window"
+            },
+            {
+                "key" : "Super + Ctrl + Down",
+                "description" : "Minimize window"
+            },
+            {
+                "key" : "Super + Ctrl + Left",
+                "description" : "Split to left"
+            },
+            {
+                "key" : "Super + Ctrl + Right",
+                "description" : "Split to right"
+            }   
+        ]
+    }
+]
