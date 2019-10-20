@@ -80,7 +80,7 @@ alias p="pushd ."
 alias pp="popd"
 
 function x11d() {
-  docker run --rm \
+  docker run \
     --user $(id -u):$(id -g) \
     -v /data/docker-home/$(id -un):/home/$(id -un) \
     --security-opt apparmor=unconfined \
@@ -99,7 +99,11 @@ function x11d() {
 }
 
 function scratch() {
-  x11d --hostname scratch -ti  mrkuz/ubuntu-base
+  if [[ -n "$1" ]]; then
+    docker start -i "$1" || x11d --hostname scratch -ti --name "$1" mrkuz/ubuntu-base
+  else
+    x11d --hostname scratch -ti --rm mrkuz/ubuntu-base
+  fi
 }
 
 export HISTCONTROL=erasedups
