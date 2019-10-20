@@ -100,7 +100,7 @@ function x11d() {
 
 function scratch() {
   if [[ -n "$1" ]]; then
-    docker start -i "$1" || x11d --hostname scratch -ti --name "$1" mrkuz/ubuntu-base
+    docker start -i "$1" || x11d --hostname "$1" -ti --name "$1" mrkuz/ubuntu-base
   else
     x11d --hostname scratch -ti --rm mrkuz/ubuntu-base
   fi
