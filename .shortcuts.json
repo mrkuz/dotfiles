@@ -136,7 +136,7 @@
             },
             {
                 "key" : "Super + Ctrl + Down",
-                "description" : "Minimize window"
+                "description" : "Restore window"
             },
             {
                 "key" : "Super + Ctrl + Left",
