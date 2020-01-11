@@ -33,6 +33,10 @@
             {
                 "key" : "L Shift + R Shift",
                 "description" : "Switch input language"
+            },
+            {
+                "key" : "Super + Alt + D",
+                "description" : "Drawing mode"
             }
         ]
     },
