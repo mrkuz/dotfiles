@@ -1,0 +1,50 @@
+{
+    /* General */
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "editor.detectIndentation": false,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.minimap.enabled": false,
+    "editor.renderControlCharacters": false,
+    "editor.rulers": [
+        120
+    ],
+    "editor.renderWhitespace": "none",
+    "editor.suggestSelection": "first",
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120,
+    "files.eol": "\n",
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "workbench.colorTheme": "Darcula",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.iconTheme": "vscode-icons",
+    /* Git */
+    "git.rebaseWhenSync": true,
+    /* Java */
+    "java.completion.guessMethodArguments": true,
+    "java.completion.maxResults": 0,
+    "java.debug.settings.enableRunDebugCodeLens": false,
+    "java.format.settings.profile": "mrkuz",
+    "java.format.settings.url": "https://raw.githubusercontent.com/mrkuz/dotfiles/master/.eclipse-java-style.xml",
+    "java.implementationsCodeLens.enabled": false,
+    "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/home/markus/.vscode/extensions/gabrielbb.vscode-lombok-1.0.0/server/lombok.jar\"",
+    "java.referencesCodeLens.enabled": false,
+    "java.saveActions.organizeImports": true,
+    "spring.initializr.defaultLanguage": "Java",
+    /* Other */
+    "vetur.format.enable": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+}
