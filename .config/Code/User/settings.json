@@ -46,5 +46,6 @@
     /* Other */
     "vetur.format.enable": false,
     "vsicons.dontShowNewVersionMessage": true,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "extensions.ignoreRecommendations": false
 }
