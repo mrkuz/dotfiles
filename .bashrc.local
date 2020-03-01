@@ -114,3 +114,5 @@ export PATH=$HOME/bin/:$HOME/.local/bin:$PATH
 export EDITOR="$EMACS"
 
 command -v kubectl >& /dev/null &&  source <(kubectl completion bash)
+
+alias pbash="bash --init-file <(echo '. ~/.bashrc; HISTFILE=/dev/null; HISTSIZE=0')"

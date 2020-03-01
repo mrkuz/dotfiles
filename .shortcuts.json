@@ -123,10 +123,6 @@
                 "description" : "Close Window"
             },
             {
-                "key" : "Alt + F5",
-                "description" : "Restore window"
-            },
-            {
                 "key" : "Alt + F7",
                 "description" : "Move window"
             },

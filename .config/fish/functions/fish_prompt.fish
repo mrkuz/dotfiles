@@ -20,7 +20,7 @@ function fish_prompt
       echo -n $_branch
     else
       set _tag (git describe --exact-match --tags HEAD 2>/dev/null)
-      if string length $_tag
+      if string length $_tag >/dev/null
         echo -n $_tag
       else
         echo -n "<dettached>"
