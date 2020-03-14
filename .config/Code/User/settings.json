@@ -1,7 +1,7 @@
 {
     /* General */
     "editor.codeActionsOnSave": {
-        "source.fixAll": true
+        "source.fixAll.eslint": true
     },
     "editor.detectIndentation": false,
     "editor.formatOnPaste": true,
@@ -39,7 +39,7 @@
     "java.format.settings.profile": "mrkuz",
     "java.format.settings.url": "https://raw.githubusercontent.com/mrkuz/dotfiles/master/.eclipse-java-style.xml",
     "java.implementationsCodeLens.enabled": false,
-    "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/home/markus/.vscode/extensions/gabrielbb.vscode-lombok-1.0.0/server/lombok.jar\"",
+    "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/home/markus/.vscode/Java/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
     "java.referencesCodeLens.enabled": false,
     "java.saveActions.organizeImports": true,
     "spring.initializr.defaultLanguage": "Java",
