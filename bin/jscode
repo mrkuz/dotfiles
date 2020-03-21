@@ -1,0 +1,2 @@
+#!/bin/bash
+code --user-data-dir ~/.vscode/JavaScript --extensions-dir  ~/.vscode/JavaScript/extensions
