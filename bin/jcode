@@ -1,2 +1,0 @@
-#!/bin/bash
-code --user-data-dir ~/.vscode/Java --extensions-dir  ~/.vscode/Java/extensions
