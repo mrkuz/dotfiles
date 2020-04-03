@@ -2,6 +2,7 @@ if status --is-interactive
   set -g EDITOR "nano"
   alias emacs "env SHELL=/bin/bash emacsclient -n -c -a emacs"
   alias docker-purge "docker rm (docker ps -aq)"
+  alias dcode "code --user-data-dir ~/.vscode/DevOps --extensions-dir  ~/.vscode/DevOps/extensions"
   alias jcode "code --user-data-dir ~/.vscode/Java --extensions-dir  ~/.vscode/Java/extensions"
   alias jscode "code --user-data-dir ~/.vscode/JavaScript --extensions-dir  ~/.vscode/JavaScript/extensions"
   abbr --add --global ga   "git add"
