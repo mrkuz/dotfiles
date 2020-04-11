@@ -4,9 +4,14 @@ function x11d
     -v /data/docker-home/(id -un):/home/(id -un) \
     --security-opt apparmor=unconfined \
     --ipc host \
-    --runtime nvidia \
+    --gpus all \
     --device /dev/dri \
     --device /dev/vga_arbiter/ \
+    --device /dev/nvidia0 \
+    --device /dev/nvidiactl \
+    --device /dev/nvidia-modeset \
+    --device /dev/nvidia-uvm \
+    --device /dev/nvidia-uvm-tools \
     -e DISPLAY="$DISPLAY" \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" \
