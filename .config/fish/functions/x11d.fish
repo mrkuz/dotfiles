@@ -4,6 +4,7 @@ function x11d
     -v /data/docker-home/(id -un):/home/(id -un) \
     --security-opt apparmor=unconfined \
     --ipc host \
+    --runtime nvidia \
     --device /dev/dri \
     --device /dev/vga_arbiter/ \
     -e DISPLAY="$DISPLAY" \
