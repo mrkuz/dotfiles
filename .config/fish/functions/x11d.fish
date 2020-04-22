@@ -12,6 +12,8 @@ function x11d
     --device /dev/nvidia-modeset \
     --device /dev/nvidia-uvm \
     --device /dev/nvidia-uvm-tools \
+    --device /dev/input \
+    --device /dev/snd \
     -e DISPLAY="$DISPLAY" \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" \
