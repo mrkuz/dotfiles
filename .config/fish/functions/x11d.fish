@@ -1,6 +1,7 @@
 function x11d
   docker run \
     --user (id -u):(id -g) \
+    -ti \
     -v /data/docker-home/(id -un):/home/(id -un) \
     --security-opt apparmor=unconfined \
     --ipc host \
