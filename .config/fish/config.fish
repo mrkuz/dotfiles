@@ -1,7 +1,7 @@
 if status --is-interactive
   set -g EDITOR "emacs"
   set -g GIT_EDITOR "nano"
-  alias emacs "env SHELL=/bin/bash emacsclient -n -c -a emacs"
+  alias ec "emacsclient -n -c -a emacs"
   alias docker-purge "docker rm (docker ps -aq)"
   alias kube-clean "kubectl get pods --all-namespaces | grep Evicted | awk '{print \" -n \" \$1 \" \" \$2}' | xargs kubectl delete pod"
   alias dcode "code --user-data-dir ~/.vscode/DevOps --extensions-dir ~/.vscode/DevOps/extensions"
