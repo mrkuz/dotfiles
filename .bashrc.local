@@ -50,6 +50,9 @@ function create_prompt() {
   if [[ -f /.dockerenv ]]; then
     PS1="${PS1} [${LIGHT_RED}container${RESET}] "
   fi
+  if [[ -f /.nixenv ]]; then
+    PS1="${PS1} [${LIGHT_RED}nix-shell${RESET}] "
+  fi
   PS1="${PS1}\n\$ "
 }
 
