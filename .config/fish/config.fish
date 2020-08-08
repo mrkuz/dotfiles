@@ -1,4 +1,5 @@
 if status --is-interactive
+  set -g PATH "$HOME/bin" $PATH
   set -g EDITOR "emacs"
   set -g GIT_EDITOR "nano"
   alias ec "emacsclient -n -c -a emacs"
