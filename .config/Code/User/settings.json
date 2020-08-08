@@ -56,5 +56,6 @@
     "java.semanticHighlighting.enabled": true,
     /* Miscellanoues */
     "editor.suggestSelection": "first",
+    "vsicons.dontShowNewVersionMessage": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 }

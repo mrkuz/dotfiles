@@ -35,6 +35,7 @@
    pkgs.google-cloud-sdk
    pkgs.kubernetes-helm
    pkgs.kubectl
+   pkgs.minikube
    # Miscellaneous
    pkgs.gitAndTools.gitFull
    pkgs.gocr
@@ -45,7 +46,7 @@
    pkgs.protobuf
    # Applications
    pkgs.android-studio
-   pkgs.kodi
+   pkgs.jetbrains.idea-community
    pkgs.netbeans
    pkgs.postman
    pkgs.qbittorrent
