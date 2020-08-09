@@ -3,16 +3,12 @@
         "name" : "Desktop",
         "shortcuts" : [
             {
-                "key" : "Super + Space",
-                "description" : "Show application launcher"
-            },
-            {
                 "key" : "Super + A",
-                "description" : "Show all applications"
+                "description" : "Show applications"
             },
             {
                 "key" : "Super + D",
-                "description" : "Hide all windows"
+                "description" : "Show desktop"
             },
             {
                 "key" : "Super + L",
@@ -28,21 +24,25 @@
             },
             {
                 "key" : "Super + W",
-                "description" : "Show window switcher"
+                "description" : "Show windows"
             },
             {
                 "key" : "L Shift + R Shift",
                 "description" : "Switch input language"
-            },
-            {
-                "key" : "Super + Alt + D",
-                "description" : "Drawing mode"
             }
         ]
     },
         {
-        "name" : "Applications",
+        "name" : "Launch",
         "shortcuts" : [
+            {
+                "key" : "Super + E",
+                "description" : "Launch Emacs"
+            },
+            {
+                "key" : "Super + H",
+                "description" : "Open home folder"
+            },
             {
                 "key" : "Super + T",
                 "description" : "Launch terminal"
@@ -63,6 +63,10 @@
             {
                 "key" : "Alt + Print",
                 "description" : "Take screenshot of a window"
+            },
+            {
+                "key" : "Super + R",
+                "description" : "Start/stop screen recording"
             }
         ]
     },
@@ -74,16 +78,16 @@
                 "description" : "Switch to workspace 1"
             },
             {
-                "key" : "Super + Shift + 1",
-                "description" : "Move window to workspace 1"
-            },
-            {
                 "key" : "Super + Up",
                 "description" : "Switch to workspace above"
             },
             {
                 "key" : "Super + Down",
                 "description" : "Switch to workspace below"
+            },
+            {
+                "key" : "Super + Shift + 1",
+                "description" : "Move window to workspace 1"
             },
             {
                 "key" : "Super + Shift + Up",
@@ -95,19 +99,19 @@
             },
             {
                 "key" : "Super + Shift + Left",
-                "description" : "Move window one monitor to the left"
+                "description" : "Move window one monitor left"
             },
             {
                 "key" : "Super + Shift + Right",
-                "description" : "Move window one monitor to the right"
+                "description" : "Move window one monitor right"
             },
             {
                 "key" : "Alt + Tab",
                 "description" : "Switch windows"
             },
             {
-                "key" : "Alt + Escape",
-                "description" : "Switch windows directly"
+                "key" : "Super + Tab",
+                "description" : "Switch applications"
             }
         ]
     },
