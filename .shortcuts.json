@@ -27,12 +27,12 @@
                 "description" : "Show windows"
             },
             {
-                "key" : "L Shift + R Shift",
+                "key" : "L ⇧ + R ⇧",
                 "description" : "Switch input language"
             }
         ]
     },
-        {
+    {
         "name" : "Launch",
         "shortcuts" : [
             {
@@ -50,27 +50,39 @@
         ]
     },
     {
-        "name" : "Screenshots",
+        "name" : "Terminal",
         "shortcuts" : [
             {
-                "key" : "Print",
-                "description" : "Take screenshot"
+                "key" : "Alt + T",
+                "description" : "New tab"
             },
             {
-                "key" : "Shift + Print",
-                "description" : "Take screenshot of an area"
+                "key" : "Alt + N",
+                "description" : "New window"
             },
             {
-                "key" : "Alt + Print",
-                "description" : "Take screenshot of a window"
+                "key" : "Alt + D",
+                "description" : "Dettach tab"
             },
             {
-                "key" : "Super + R",
-                "description" : "Start/stop screen recording"
+                "key" : "Alt + Q",
+                "description" : "Close tab"
+            },
+            {
+                "key" : "Alt + ←/→",
+                "description" : "Switch to previous/next tab"
+            },
+            {
+                "key" : "Alt + 1",
+                "description" : "Switch to tab 1"
+            },
+            {
+                "key" : "Alt + ⇧ + ←/→",
+                "description" : "Move tab to the left/right"
             }
         ]
     },
-    {
+   {
         "name" : "Navigation",
         "shortcuts" : [
             {
@@ -78,32 +90,20 @@
                 "description" : "Switch to workspace 1"
             },
             {
-                "key" : "Super + Up",
-                "description" : "Switch to workspace above"
+                "key" : "Super + ↑/↓",
+                "description" : "Switch to workspace above/below"
             },
             {
-                "key" : "Super + Down",
-                "description" : "Switch to workspace below"
-            },
-            {
-                "key" : "Super + Shift + 1",
+                "key" : "Super + ⇧ + 1",
                 "description" : "Move window to workspace 1"
             },
             {
-                "key" : "Super + Shift + Up",
-                "description" : "Move window one workspace up"
+                "key" : "Super + ⇧ + ↑/↓",
+                "description" : "Move window one workspace up/down"
             },
             {
-                "key" : "Super + Shift + Down",
-                "description" : "Move window one workspace down"
-            },
-            {
-                "key" : "Super + Shift + Left",
-                "description" : "Move window one monitor left"
-            },
-            {
-                "key" : "Super + Shift + Right",
-                "description" : "Move window one monitor right"
+                "key" : "Super + ⇧ + ←/→",
+                "description" : "Move window one monitor left/right"
             },
             {
                 "key" : "Alt + Tab",
@@ -135,21 +135,38 @@
                 "description" : "Resize window"
             },
             {
-                "key" : "Super + Ctrl + Up",
+                "key" : "Super + Ctrl + ↑",
                 "description" : "Maximize window"
             },
             {
-                "key" : "Super + Ctrl + Down",
+                "key" : "Super + Ctrl + ↓",
                 "description" : "Restore window"
             },
             {
-                "key" : "Super + Ctrl + Left",
-                "description" : "Split to left"
+                "key" : "Super + Ctrl + ←/→",
+                "description" : "Split to left/right"
+            }
+        ]
+    },
+    {
+        "name" : "Screenshots",
+        "shortcuts" : [
+            {
+                "key" : "Print",
+                "description" : "Take screenshot"
             },
             {
-                "key" : "Super + Ctrl + Right",
-                "description" : "Split to right"
-            }   
+                "key" : "⇧ + Print",
+                "description" : "Take screenshot of an area"
+            },
+            {
+                "key" : "Alt + Print",
+                "description" : "Take screenshot of a window"
+            },
+            {
+                "key" : "Super + R",
+                "description" : "Start/stop screen recording"
+            }
         ]
     }
 ]
