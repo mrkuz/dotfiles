@@ -1,14 +1,9 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball https://github.com/nix-community/emacs-overlay/archive/master.tar.gz))
-  ];
-
   # Emacs
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsUnstable;
   };
   services.emacs = {
     enable = true;
@@ -36,6 +31,7 @@
    pkgs.kubernetes-helm
    pkgs.kubectl
    pkgs.minikube
+   pkgs.terraform
    # Miscellaneous
    pkgs.gitAndTools.gitFull
    pkgs.gocr
