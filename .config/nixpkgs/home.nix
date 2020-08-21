@@ -40,6 +40,7 @@
    pkgs.mkvtoolnix-cli
    pkgs.nodejs
    pkgs.protobuf
+   pkgs.x11docker
    # Applications
    pkgs.android-studio
    pkgs.jetbrains.idea-community
