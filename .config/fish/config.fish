@@ -8,6 +8,7 @@ if status --is-interactive
   alias dcode "code --user-data-dir ~/.vscode/DevOps --extensions-dir ~/.vscode/DevOps/extensions"
   alias jcode "code --user-data-dir ~/.vscode/Java --extensions-dir ~/.vscode/Java/extensions"
   alias jscode "code --user-data-dir ~/.vscode/JavaScript --extensions-dir ~/.vscode/JavaScript/extensions"
+  alias java-shell="nix-shell $HOME/etc/nix-shell/sdkman/shell.nix"
   abbr --add --global ga   "git add"
   abbr --add --global gap  "git add -p"
   abbr --add --global gau  "git add -u"
