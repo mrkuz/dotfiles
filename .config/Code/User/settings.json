@@ -58,4 +58,7 @@
     "editor.suggestSelection": "first",
     "vsicons.dontShowNewVersionMessage": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "vs-kubernetes": {
+        "vs-kubernetes.minikube-path.linux": "/home/markus/.vs-kubernetes/tools/minikube/linux-amd64/minikube"
+    }
 }
