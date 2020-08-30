@@ -33,6 +33,7 @@
    pkgs.minikube
    pkgs.terraform
    # Miscellaneous
+   pkgs.conky
    pkgs.gitAndTools.gitFull
    pkgs.gocr
    pkgs.imagemagick
