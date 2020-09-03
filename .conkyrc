@@ -1,5 +1,5 @@
 conky.config = {
-    alignment = 'top_right',
+    alignment = 'bottom_right',
     own_window = true,
     own_window_transparent = true,
     own_window_argb_visual = true,
@@ -8,8 +8,8 @@ conky.config = {
     double_buffer = true,
     use_xft = true,
     font = 'DejaVu Sans Mono:size=11',
-    gap_x = 60,
-    gap_y = 60,
+    gap_x = 20,
+    gap_y = 20,
     minimum_width = 400,
     default_color = 'grey',
     no_buffers = true,

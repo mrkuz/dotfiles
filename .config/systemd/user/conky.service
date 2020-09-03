@@ -1,0 +1,11 @@
+[Install]
+WantedBy=default.target
+
+[Service]
+ExecStartPre=/run/current-system/sw/bin/sleep 10
+ExecStart=/home/markus/.nix-profile/bin/conky
+Restart=on-failure
+
+[Unit]
+Description=Conky system monitor
+Documentation=man:conky(1)
