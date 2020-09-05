@@ -48,6 +48,14 @@ function fish_prompt
     echo -n "]"
   end
 
+  if test -f /.nixenv
+    echo -n " ["
+    set_color brred
+    echo -n "nix-shell"
+    set_color normal
+    echo -n "]"
+  end
+
   echo
   if test $_user = "root"
     echo "# "
