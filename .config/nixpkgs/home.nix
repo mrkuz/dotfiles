@@ -30,6 +30,7 @@
    pkgs.google-cloud-sdk
    pkgs.kubernetes-helm
    pkgs.kubectl
+   pkgs.kubetail
    pkgs.minikube
    pkgs.terraform
    # Miscellaneous
