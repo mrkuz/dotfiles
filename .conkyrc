@@ -39,5 +39,6 @@ doom.d $alignr ${exec git -C ~/etc/doom.d/ diff --quiet --exit-code && echo Clea
 ansible $alignr ${exec git -C ~/etc/ansible/ diff --quiet --exit-code && echo Clean || echo Dirty}
 nixos $alignr ${exec git -C ~/etc/nixos/ diff --quiet --exit-code && echo Clean || echo Dirty}
 nix-shell $alignr ${exec git -C ~/etc/nix-shell/ diff --quiet --exit-code && echo Clean || echo Dirty}
+nix-scripts $alignr ${exec git -C ~/src/nix-scripts/ diff --quiet --exit-code && echo Clean || echo Dirty}
 dockerfiles $alignr ${exec git -C ~/src/dockerfiles/ diff --quiet --exit-code && echo Clean || echo Dirty}
 ]]
