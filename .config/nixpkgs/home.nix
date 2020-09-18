@@ -44,6 +44,10 @@
    pkgs.potrace
    pkgs.protobuf
    pkgs.x11docker
+   # Java
+   pkgs.gradle
+   pkgs.jdk14
+   pkgs.maven
    # Applications
    pkgs.android-studio
    pkgs.jetbrains.idea-community
