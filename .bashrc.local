@@ -90,6 +90,3 @@ export GIT_EDITOR=nano
 command -v kubectl >& /dev/null &&  source <(kubectl completion bash)
 
 alias pbash="bash --init-file <(echo '. ~/.bashrc; HISTFILE=/dev/null; HISTSIZE=0')"
-
-export SDKMAN_DIR="/home/markus/opt/sdkman"
-source "$SDKMAN_DIR/bin/sdkman-init.sh"
