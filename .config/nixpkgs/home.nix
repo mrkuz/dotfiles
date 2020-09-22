@@ -58,6 +58,7 @@
    pkgs.skypeforlinux
    pkgs.spotify
    pkgs.steam
+   pkgs.steam-run
    pkgs.syncthing-gtk
    pkgs.virtualbox
    pkgs.vscode
