@@ -8,6 +8,7 @@ conky.config = {
     double_buffer = true,
     use_xft = true,
     font = 'DejaVu Sans Mono:size=11',
+    draw_shades = false,
     gap_x = 20,
     gap_y = 20,
     minimum_width = 400,
