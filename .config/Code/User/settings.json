@@ -9,7 +9,6 @@
         120
     ],
     "editor.wordWrapColumn": 120,
-
     "files.eol": "\n",
     "files.exclude": {
         "**/.classpath": true,
@@ -41,6 +40,7 @@
     "java.completion.maxResults": 0,
     "java.format.settings.profile": "mrkuz",
     "java.format.settings.url": "https://raw.githubusercontent.com/mrkuz/dotfiles/master/.eclipse-java-style.xml",
+    "java.home": "/home/markus/.nix-profile/lib/openjdk/",
     "java.implementationsCodeLens.enabled": true,
     "java.import.gradle.arguments": "",
     "java.import.gradle.home": "",
