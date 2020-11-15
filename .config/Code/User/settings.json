@@ -58,6 +58,7 @@
     "java.semanticHighlighting.enabled": true,
     /* Miscellanoues */
     "editor.suggestSelection": "first",
+    "editor.suggest.showStatusBar": true,
     "vsicons.dontShowNewVersionMessage": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "vs-kubernetes": {
