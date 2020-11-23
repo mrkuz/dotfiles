@@ -34,7 +34,9 @@
    pkgs.minikube
    pkgs.terraform
    # Miscellaneous
+   pkgs.android-file-transfer
    pkgs.conky
+   pkgs.curlftpfs
    pkgs.gitAndTools.gitFull
    pkgs.gocr
    pkgs.imagemagick
@@ -53,14 +55,12 @@
    pkgs.jetbrains.idea-community
    pkgs.netbeans
    pkgs.postman
-   pkgs.qbittorrent
    pkgs.robo3t
    pkgs.skypeforlinux
    pkgs.spotify
    pkgs.steam
    pkgs.steam-run
-   pkgs.syncthing-gtk
-   pkgs.virtualbox
+   # pkgs.syncthing-gtk
    pkgs.vscode
   ];
 }
