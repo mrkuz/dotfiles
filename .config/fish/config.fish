@@ -9,7 +9,7 @@ if status --is-interactive
   alias dcode "code --user-data-dir ~/.vscode/DevOps --extensions-dir ~/.vscode/DevOps/extensions"
   alias jcode "code --user-data-dir ~/.vscode/Java --extensions-dir ~/.vscode/Java/extensions"
   alias jscode "code --user-data-dir ~/.vscode/JavaScript --extensions-dir ~/.vscode/JavaScript/extensions"
-  alias ubuntu-shell="docker run -ti -u (id -un) -h ubuntu-shell -v /data/overlay/home/mnt/(id -un):/home/(id -un) -v /nix:/nix:ro -v /run/current-system:/run/current-system:ro -e PATH=$PATH --rm mrkuz/ubuntu-shell"
+  alias ubuntu-shell="docker run -ti -u (id -un) -h ubuntu-shell -v /data/overlay/home/mnt/(id -un):/home/(id -un) -v /nix:/nix:ro -v /run/current-system:/run/current-system:ro --rm mrkuz/ubuntu-shell"
   alias copy="xclip -selection clipboard"
   alias paste="xclip -o -selection clipboard"
   alias mvn="JAVA_HOME=$JAVA_HOME command mvn"
