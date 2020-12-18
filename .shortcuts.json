@@ -23,10 +23,6 @@
                 "description" : "Show shortcuts overview"
             },
             {
-                "key" : "Super + W",
-                "description" : "Show windows"
-            },
-            {
                 "key" : "L ⇧ + R ⇧",
                 "description" : "Switch input language"
             }
@@ -35,6 +31,10 @@
     {
         "name" : "Launch",
         "shortcuts" : [
+            {
+                "key" : "Super + X",
+                "description" : "Show launcher"
+            },
             {
                 "key" : "Super + E",
                 "description" : "Launch Emacs"
@@ -104,6 +104,10 @@
             {
                 "key" : "Super + ⇧ + ←/→",
                 "description" : "Move window one monitor left/right"
+            },
+            {
+                "key" : "Super + W",
+                "description" : "Switch to window ..."
             },
             {
                 "key" : "Alt + Tab",
