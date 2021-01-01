@@ -1,4 +1,5 @@
 if status --is-interactive
+  set -U fish_greeting
   set -g PATH "$HOME/bin" $PATH
   set -g EDITOR "emacs"
   set -g GIT_EDITOR "nano"
