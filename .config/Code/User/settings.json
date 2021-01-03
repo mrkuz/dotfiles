@@ -23,6 +23,7 @@
     "search.showLineNumbers": true,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
+    "update.mode": "none",
     "workbench.colorTheme": "Darcula",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.iconTheme": "vscode-icons",
