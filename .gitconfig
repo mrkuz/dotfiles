@@ -11,3 +11,5 @@
     helper = store
 [alias]
     sdiff = "diff --staged"
+[init]
+    defaultBranch = "master"
