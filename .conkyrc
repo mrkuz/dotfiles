@@ -7,11 +7,11 @@ conky.config = {
     update_interval = 1.0,
     double_buffer = true,
     use_xft = true,
-    font = 'DejaVu Sans Mono:size=11',
+    font = 'Ubuntu Mono:size=12',
     draw_shades = false,
     gap_x = 20,
     gap_y = 20,
-    minimum_width = 400,
+    minimum_width = 300,
     default_color = 'grey',
     no_buffers = true,
 }
@@ -24,16 +24,16 @@ $hr
 Load: $alignr $loadavg
 CPU usage: $alignr $cpu%
 CPU speed: $alignr $freq MHz
-Memory used: $alignr $mem of $memmax
-Swap used: $alignr $swap of $swapmax
+Memory used: $alignr $mem / $memmax
+Swap used: $alignr $swap / $swapmax
 $hr
 IP: $alignr ${addr wlp2s0}
-Download rate: $alignr ${downspeed wlp2s0}/s (${totaldown wlp2s0})
-Upload rate: $alignr ${upspeed wlp2s0}/s (${totalup wlp2s0})
+Download: $alignr ${downspeed wlp2s0}/s (${totaldown wlp2s0})
+Upload: $alignr ${upspeed wlp2s0}/s (${totalup wlp2s0})
 $hr
-Root FS free: $alignr ${fs_free /} of ${fs_size /}
-Home FS free: $alignr ${fs_free /home} of ${fs_size /home}
-Data FS free: $alignr ${fs_free /data/user} of ${fs_size /data/user}
+Root FS free: $alignr ${fs_free /} / ${fs_size /}
+Home FS free: $alignr ${fs_free /home} / ${fs_size /home}
+Data FS free: $alignr ${fs_free /data/user} / ${fs_size /data/user}
 $hr
 dotfiles.git $alignr ${exec git -C ~/etc/dotfiles/ diff --quiet --exit-code && echo Clean || echo Dirty}
 doom.d $alignr ${exec git -C ~/etc/doom.d/ diff --quiet --exit-code && echo Clean || echo Dirty}
