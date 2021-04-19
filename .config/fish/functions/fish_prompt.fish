@@ -48,7 +48,7 @@ function fish_prompt
     echo -n "]"
   end
 
-  if test -f /.nixenv
+  if set -q NIX_SHELL
     echo -n " ["
     set_color brred
     echo -n "nix-shell"
