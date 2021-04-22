@@ -51,7 +51,7 @@ function fish_prompt
   if set -q NIX_SHELL
     echo -n " ["
     set_color brred
-    echo -n "nix-shell"
+    echo -n "$NIX_SHELL"
     set_color normal
     echo -n "]"
   end
