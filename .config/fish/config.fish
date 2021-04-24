@@ -11,6 +11,8 @@ if status --is-interactive
   alias paste="xclip -o -selection clipboard"
   alias mvn="JAVA_HOME=$JAVA_HOME command mvn"
   alias strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
+  alias less="less -r"
+  alias fancy="diff-so-fancy"
 
   abbr --add --global ec   "emacsclient -c"
   abbr --add --global ga   "git add"
