@@ -3,7 +3,10 @@ if status --is-interactive
   set -g PATH "$HOME/bin" $PATH
   set -g EDITOR "emacs"
   set -g GIT_EDITOR "nano"
-  set -g JAVA_HOME "$HOME/.nix-profile/lib/openjdk/"
+
+  if test -z $JAVA_HOME
+    set -g JAVA_HOME "$HOME/.nix-profile/lib/openjdk/"
+  end
 
   alias docker-purge "docker rm (docker ps -aq)"
   alias kube-clean "kubectl get pods --all-namespaces | grep Evicted | awk '{print \" -n \" \$1 \" \" \$2}' | xargs kubectl delete pod"
