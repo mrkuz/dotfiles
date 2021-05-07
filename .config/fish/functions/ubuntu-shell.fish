@@ -1,8 +1,18 @@
 function ubuntu-shell
+    set -x user (id -un)
+    set -x overlay "/data/overlay/ubuntu/$user"
+
+    function mount-overlay
+        if ! mountpoint -q "$overlay/mnt"
+            sudo mkdir -p "$overlay/"{mnt,rw,work}
+            sudo mount -t overlay overlay -o "lowerdir=/home/$user,upperdir=$overlay/rw,workdir=$overlay/work" "$overlay/mnt"
+        end
+    end
+
     function run-docker
         docker run -ti \
             -u (id -un) \
-            -v /data/overlay/home/mnt/(id -un):/home/(id -un) \
+            -v "$overlay/mnt/":/home/(id -un) \
             -v /nix:/nix:ro \
             -v /run/current-system:/run/current-system:ro \
             -e LANG=C.UTF-8 \
@@ -10,6 +20,13 @@ function ubuntu-shell
             $argv \
             mrkuz/ubuntu-shell
         functions -e run-docker
+    end
+
+    mount-overlay
+
+    if ! mountpoint -q "$overlay/mnt"
+        echo "Mount overlay failed"
+        return
     end
 
     if test -n "$argv[1]"
