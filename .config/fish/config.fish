@@ -34,4 +34,15 @@ if status --is-interactive
   abbr --add --global grh  "git reset HEAD"
   abbr --add --global gs   "git status"
   abbr --add --global gka  "gitk --all"
+
+  if test -n $TMUX_PANE
+    set pane (string replace "%" "" $TMUX_PANE)
+    mkdir -p ~/.tmp/tmux/pwd/
+    echo (pwd) > ~/.tmp/tmux/pwd/$pane
+
+    function __my-store-pwd --on-variable PWD
+      status --is-command-substitution; and return
+      echo (pwd) > ~/.tmp/tmux/pwd/$pane
+    end
+  end
 end
