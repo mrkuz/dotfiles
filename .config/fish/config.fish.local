@@ -4,7 +4,7 @@ if status --is-interactive
   set -g EDITOR "emacs"
   set -g GIT_EDITOR "nano"
 
-  if test -z $JAVA_HOME
+  if test -z "$JAVA_HOME"
     set -g JAVA_HOME "$HOME/.nix-profile/lib/openjdk/"
   end
 
@@ -35,7 +35,7 @@ if status --is-interactive
   abbr --add --global gs   "git status"
   abbr --add --global gka  "gitk --all"
 
-  if test -n $TMUX_PANE
+  if test -n "$TMUX_PANE"
     set pane (string replace "%" "" $TMUX_PANE)
     mkdir -p ~/.tmp/tmux/pwd/
     echo (pwd) > ~/.tmp/tmux/pwd/$pane
