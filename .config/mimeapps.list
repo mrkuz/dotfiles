@@ -1,6 +1,7 @@
 [Default Applications]
 text/html=chromium-browser.desktop
 inode/directory=org.gnome.Nautilus.desktop
+x-scheme-handler/org-protocol=org-protocol.desktop
 
 [Added Associations]
 application/pdf=org.gnome.Evince.desktop;
