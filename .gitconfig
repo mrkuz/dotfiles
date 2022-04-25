@@ -13,3 +13,5 @@
     sdiff = "diff --staged"
 [init]
     defaultBranch = "main"
+[safe]
+    directory = /nix/nixpkgs
