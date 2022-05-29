@@ -73,10 +73,11 @@ audio/x-mod=vlc.desktop
 audio/x-s3m=vlc.desktop
 audio/x-xm=vlc.desktop
 x-scheme-handler/mailto=thunderbird.desktop
+x-scheme-handler/postman=Postman.desktop
 
 [Added Associations]
 application/pdf=org.gnome.Evince.desktop;
-text/plain=org.gnome.gedit.desktop;
+text/plain=org.gnome.TextEditor.desktop;emacs.desktop;
 image/png=org.gnome.eog.desktop;gimp.desktop;
 image/jpeg=org.gnome.eog.desktop;gimp.desktop;
 application/xml=org.gnome.gedit.desktop;
