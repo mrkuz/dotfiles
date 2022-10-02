@@ -1,0 +1,50 @@
+location:
+  repositories:
+    - /home/markus/Backup/borg
+  one_file_system: true
+  atime: false
+  patterns:
+    - P sh
+    - R /home/markus
+    - '+ /home/*/bin'
+    - '+ /home/*/Books'
+    - '+ /home/*/Documents'
+    - '- /home/*/Downloads'
+    - '+ /home/*/etc'
+    - '- /home/*/Games'
+    - '+ /home/*/Notes'
+    - '- /home/*/opt'
+    - '+ /home/*/org'
+    - '+ /home/*/Pictures'
+    - '+ /home/*/Scripts'
+    - '- /home/*/Shared'
+    - '- /home/*/src'
+    - '- /home/*/tmp'
+    - '+ /home/*/Videos'
+    - '+ /home/*/Workspace'
+    - '+ /home/*/.android/debug.keystore'
+    - '+ /home/*/.bash_history'
+    - '+ /home/*/.git-credentials'
+    - '+ /home/*/.cache/thumbnails'
+    - '+ /home/*/.config'
+    - '+ /home/*/.hunspell_*'
+    - '+ /home/*/.local/share/fish'
+    - '+ /home/*/.kodi'
+    - '+ /home/*/.kube'
+    - '+ /home/*/.ssh'
+    - '+ /home/*/.thunderbird'
+    - '- /home/*/*'
+
+storage:
+  compression: lz4
+  archive_name_format: "{hostname}-markus-{now}"
+
+retention:
+  keep_daily: -1
+
+consistency:
+  checks:
+    - name: repository
+    - name: archives
+  check_last: 3
+  
