@@ -1,9 +1,9 @@
 if status --is-interactive
   set -U fish_greeting
-  set -g PATH "$HOME/bin" $PATH
-  set -g EDITOR "emacs"
-  set -g GIT_EDITOR "nano"
-  set -g SDKMAN_DIR "$HOME/opt/sdkman"
+  set -gx PATH "$HOME/bin" $PATH
+  set -gx EDITOR "emacs"
+  set -gx GIT_EDITOR "nano"
+  set -gx SDKMAN_DIR "$HOME/opt/sdkman"
 
   if test -z "$JAVA_HOME"
     set -g JAVA_HOME "$HOME/.nix-profile/lib/openjdk/"
