@@ -86,6 +86,7 @@ export HISTFILESIZE=10000
 export PATH=$HOME/bin/:$HOME/.local/bin:$PATH
 export EDITOR="$EMACS"
 export GIT_EDITOR=nano
+export SDKMAN_DIR="$HOME/opt/sdkman"
 
 command -v kubectl >& /dev/null &&  source <(kubectl completion bash)
 

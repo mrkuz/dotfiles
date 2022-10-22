@@ -3,9 +3,14 @@ if status --is-interactive
   set -g PATH "$HOME/bin" $PATH
   set -g EDITOR "emacs"
   set -g GIT_EDITOR "nano"
+  set -g SDKMAN_DIR "$HOME/opt/sdkman"
 
   if test -z "$JAVA_HOME"
     set -g JAVA_HOME "$HOME/.nix-profile/lib/openjdk/"
+  end
+
+  function sdk
+    bass source "$SDKMAN_DIR/bin/sdkman-init.sh" --no-use ';' sdk $argv
   end
 
   alias docker-purge "docker rm (docker ps -aq)"
