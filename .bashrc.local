@@ -84,10 +84,10 @@ export HISTSIZE=10000
 export HISTFILESIZE=10000
 
 export PATH=$HOME/bin/:$HOME/.local/bin:$PATH
-export EDITOR="$EMACS"
-export GIT_EDITOR=nano
+export EDITOR="emacs"
+export GIT_EDITOR=emacs
 export SDKMAN_DIR="$HOME/opt/sdkman"
 
-command -v kubectl >& /dev/null &&  source <(kubectl completion bash)
+command -v kubectl >& /dev/null && source <(kubectl completion bash)
 
-alias pbash="bash --init-file <(echo '. ~/.bashrc; HISTFILE=/dev/null; HISTSIZE=0')"
+alias bash-private="bash --init-file <(echo '. ~/.bashrc; HISTFILE=/dev/null; HISTSIZE=0')"

@@ -2,7 +2,7 @@ if status --is-interactive
   set -U fish_greeting
   set -gx PATH "$HOME/bin" "$HOME/.local/bin" $PATH
   set -gx EDITOR "emacs"
-  set -gx GIT_EDITOR "nano"
+  set -gx GIT_EDITOR "emacs"
   set -gx SDKMAN_DIR "$HOME/opt/sdkman"
 
   if test -z "$JAVA_HOME"
@@ -17,7 +17,6 @@ if status --is-interactive
   alias kube-clean "kubectl get pods --all-namespaces | grep Evicted | awk '{print \" -n \" \$1 \" \" \$2}' | xargs kubectl delete pod"
   alias copy="xclip -selection clipboard"
   alias paste="xclip -o -selection clipboard"
-  alias mvn="JAVA_HOME=$JAVA_HOME command mvn"
   alias strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
   alias less="less -r"
   alias fancy="diff-so-fancy"
