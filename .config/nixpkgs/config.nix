@@ -1,1 +1,6 @@
-{ allowUnfree = true; }
+{
+  allowUnfree = true;
+  permittedInsecurePackages = [
+    "python-2.7.18.6"
+  ];
+}

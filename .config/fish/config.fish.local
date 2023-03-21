@@ -15,11 +15,12 @@ if status --is-interactive
 
   alias docker-purge "docker rm (docker ps -aq)"
   alias kube-clean "kubectl get pods --all-namespaces | grep Evicted | awk '{print \" -n \" \$1 \" \" \$2}' | xargs kubectl delete pod"
-  alias copy="xclip -selection clipboard"
-  alias paste="xclip -o -selection clipboard"
-  alias strip-ansi="sed 's/\x1b\[[0-9;]*m//g'"
-  alias less="less -r"
-  alias fancy="diff-so-fancy"
+  alias copy "xclip -selection clipboard"
+  alias paste "xclip -o -selection clipboard"
+  alias strip-ansi "sed 's/\x1b\[[0-9;]*m//g'"
+  alias less "less -r"
+  alias fancy "diff-so-fancy"
+  alias pts "phoronix-test-suite"
 
   abbr --add --global ec   "emacsclient -c"
   abbr --add --global ga   "git add"
