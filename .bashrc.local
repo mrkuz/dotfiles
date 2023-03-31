@@ -47,7 +47,7 @@ function create_prompt() {
     fi
     PS1="${PS1}${RESET}]"
   fi
-  if [[ -f /.dockerenv ]]; then
+  if [[ -f /.dockerenv || -f /run/.containerenv ]]; then
     PS1="${PS1} [${LIGHT_RED}container${RESET}] "
   fi
   if [[ -n "${NIX_SHELL}" ]]; then
