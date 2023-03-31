@@ -42,7 +42,7 @@ function fish_prompt
     end
   end
 
- if test -f /.dockerenv or test -f /run/.containerenv
+ if test -f /.dockerenv -o -f /run/.containerenv
     echo -n " ["
     set_color brred
     echo -n "container"
