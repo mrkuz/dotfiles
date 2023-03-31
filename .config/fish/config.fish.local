@@ -1,6 +1,7 @@
 if status --is-interactive
   set -U fish_greeting
   set -gx PATH "$HOME/bin" "$HOME/.local/bin" $PATH
+  set -gx XDG_DATA_DIRS "/var/lib/flatpak/exports/share" "$HOME/.local/share/flatpak/exports/share" $XDG_DATA_DIRS
   set -gx EDITOR "emacs"
   set -gx GIT_EDITOR "emacs"
   set -gx SDKMAN_DIR "$HOME/opt/sdkman"
