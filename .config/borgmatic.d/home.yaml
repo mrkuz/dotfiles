@@ -8,19 +8,23 @@ location:
     - R /home/markus
     - '+ /home/*/bin'
     - '+ /home/*/Books'
+    - '- /home/*/Desktop'
     - '+ /home/*/Documents'
     - '- /home/*/Downloads'
     - '+ /home/*/etc'
     - '- /home/*/Games'
+    - '- /home/*/Music'
     - '+ /home/*/Notes'
     - '- /home/*/opt'
     - '+ /home/*/org'
     - '+ /home/*/Pictures'
+    - '- /home/*/Public'
     - '+ /home/*/Scripts'
     - '- /home/*/Shared'
     - '- /home/*/src'
+    - '+ /home/*/Templates'
     - '- /home/*/tmp'
-    - '+ /home/*/Videos'
+    - '- /home/*/Videos'
     - '+ /home/*/Workspace'
     - '+ /home/*/.android/debug.keystore'
     - '+ /home/*/.bash_history'
@@ -28,9 +32,9 @@ location:
     - '+ /home/*/.cache/thumbnails'
     - '+ /home/*/.config'
     - '+ /home/*/.hunspell_*'
-    - '+ /home/*/.local/share/fish'
+    - '+ /home/*/.local/share/fish/fish_history'
     - '+ /home/*/.kodi'
-    - '+ /home/*/.kube'
+    - '+ /home/*/.kube/config'
     - '+ /home/*/.ssh'
     - '+ /home/*/.thunderbird'
     - '- /home/*/*'
@@ -47,4 +51,4 @@ consistency:
     - name: repository
     - name: archives
   check_last: 3
-  
+
