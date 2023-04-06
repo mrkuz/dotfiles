@@ -1,19 +1,13 @@
 function ubuntu-shell
     set -x user (id -un)
     set -x uid (id -u)
-    set -x overlay "/data/overlay/ubuntu/$user"
+    set -x home "/data/overlays/home/mnt/$user/"
 
-    function mount-overlay
-        if ! mountpoint -q "$overlay/mnt"
-            sudo mkdir -p "$overlay/"{mnt,rw,work}
-            sudo mount -t overlay overlay -o "lowerdir=/home/$user,upperdir=$overlay/rw,workdir=$overlay/work" "$overlay/mnt"
-        end
-    end
-
-    function run-docker
-        docker run -ti \
+    function run-podman
+        podman run -ti \
             -u "$user" \
-            -v "$overlay/mnt/":"/home/$user" \
+            --userns keep-id \
+            -v "$home":"/home/$user" \
             # nixos
             -v /nix:/nix:ro \
             -v /run/current-system:/run/current-system:ro \
@@ -47,20 +41,13 @@ function ubuntu-shell
             --device /dev/vga_arbiter \
             $argv \
             mrkuz/ubuntu-shell
-        functions -e run-docker
-    end
-
-    mount-overlay
-
-    if ! mountpoint -q "$overlay/mnt"
-        echo "Mount overlay failed"
-        return
+        functions -e run-podman
     end
 
     if test -n "$argv[1]"
         set name "$argv[1]"
-        docker start -i $name || run-docker -h $name --name $name
+        podman start -i $name || run-podman -h $name --name $name
     else
-        run-docker -h ubuntu-shell --rm
+        run-podman -h ubuntu-shell --rm
     end
 end
