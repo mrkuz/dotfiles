@@ -42,6 +42,7 @@ location:
 storage:
   compression: lz4
   archive_name_format: "{hostname}-markus-{now}"
+  unknown_unencrypted_repo_access_is_ok: true
 
 retention:
   keep_daily: -1
