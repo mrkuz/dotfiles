@@ -18,6 +18,7 @@ location:
     - '- /home/*/opt'
     - '+ /home/*/org'
     - '+ /home/*/Pictures'
+    - '+ /home/*/Projects'
     - '- /home/*/Public'
     - '+ /home/*/Scripts'
     - '- /home/*/Shared'
